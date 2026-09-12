@@ -1,14 +1,10 @@
 'use client'
-import { useState } from 'react'
-import { Heart, MessageCircle, Calendar, ShieldCheck } from 'lucide-react'
+import { MessageCircle, ShieldCheck } from 'lucide-react'
 import { getProduct, relatedProducts, formatPrice } from '@/lib/products'
 import { ProductCard } from '@/components/product-card'
-import { BookingModal } from '@/components/booking-modal'
-import type { Product } from '@/lib/products'
 
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
   const product = getProduct(params.id)
-  const [bookingProduct, setBookingProduct] = useState<Product | null>(null)
 
   const whatsappUrl = `https://wa.me/9198XXXXXXXX?text=${encodeURIComponent(`Hi, I'm interested in ${product.name} (${product.code}). Please share details.`)}`
 
@@ -75,18 +71,11 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-12 w-full items-center justify-center gap-2 rounded-full border border-[#25D366]/40 bg-[#25D366]/10 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-[#25D366] transition-all duration-300 hover:bg-[#25D366]/20 hover:shadow-[0_0_20px_rgba(37,211,102,0.15)]"
+              className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-maroon border border-gold/40 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold-light transition-all duration-300 hover:bg-maroon-dark hover:shadow-[0_0_25px_rgba(200,157,71,0.45)] active:scale-[0.98]"
             >
               <MessageCircle size={14} />
               Enquire on WhatsApp
             </a>
-            <button
-              onClick={() => setBookingProduct(product)}
-              className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-maroon border border-gold/40 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold-light transition-all duration-300 hover:bg-maroon-dark hover:shadow-[0_0_25px_rgba(200,157,71,0.45)] active:scale-[0.98]"
-            >
-              <Calendar size={14} />
-              Book In-Store Viewing
-            </button>
           </div>
 
           {/* Trust Signals */}
@@ -111,12 +100,10 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
         <h2 className="mt-4 text-center font-serif text-4xl text-maroon">Heritage Selections</h2>
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {relatedProducts(product.id).map((p) => (
-            <ProductCard key={p.id} product={p} onBookViewing={setBookingProduct} />
+            <ProductCard key={p.id} product={p} />
           ))}
         </div>
       </section>
-
-      <BookingModal product={bookingProduct} onClose={() => setBookingProduct(null)} />
     </main>
   )
 }

@@ -1,11 +1,11 @@
 'use client'
 import Link from 'next/link'
-import { Heart, Eye, MessageCircle, Calendar } from 'lucide-react'
+import { Heart, Eye, MessageCircle } from 'lucide-react'
 import { useState } from 'react'
 import type { Product } from '@/lib/products'
 import { formatPrice } from '@/lib/products'
 
-export function ProductCard({ product, onBookViewing }: { product: Product; onBookViewing?: (product: Product) => void }) {
+export function ProductCard({ product }: { product: Product }) {
   const [liked, setLiked] = useState(false)
   const [hoveredMetal, setHoveredMetal] = useState<string | null>(null)
   const [selectedMetal, setSelectedMetal] = useState(product.metals[0]?.name ?? '')
@@ -126,13 +126,15 @@ export function ProductCard({ product, onBookViewing }: { product: Product; onBo
             <MessageCircle size={12} />
             Enquire
           </a>
-          <button
-            onClick={() => onBookViewing?.(product)}
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex flex-1 items-center justify-center gap-2 rounded-full border border-maroon/20 bg-maroon/5 px-3 py-2.5 font-sans text-[9px] font-medium uppercase tracking-[0.1em] text-maroon transition-all duration-300 hover:bg-maroon hover:text-gold-light hover:border-maroon hover:shadow-[0_0_15px_rgba(74,14,23,0.2)]"
           >
-            <Calendar size={12} />
-            Book Viewing
-          </button>
+            <MessageCircle size={12} />
+            WhatsApp
+          </a>
         </div>
       </div>
     </article>

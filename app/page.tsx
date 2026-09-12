@@ -5,8 +5,6 @@ import { ArrowRight, Calendar, Video } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { products, collections } from '@/lib/products'
 import { ProductCard } from '@/components/product-card'
-import { BookingModal } from '@/components/booking-modal'
-import type { Product } from '@/lib/products'
 
 const metalOptions = [
   { id: '22kt-yellow', label: '22KT Yellow Gold', subtitle: 'Timeless temple gold with rich warm lustre' },
@@ -18,7 +16,6 @@ export default function HomePage() {
   const [activeMetal, setActiveMetal] = useState('22kt-yellow')
   const heroRef = useRef<HTMLDivElement>(null)
   const [tilt, setTilt] = useState({ x: 0, y: 0 })
-  const [bookingProduct, setBookingProduct] = useState<Product | null>(null)
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!heroRef.current) return
@@ -64,20 +61,14 @@ export default function HomePage() {
               <Link href="/products" className="inline-flex items-center gap-2 rounded-full bg-maroon border border-gold/40 px-8 py-3.5 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold-light transition-all duration-300 hover:bg-maroon-dark hover:shadow-[0_0_25px_rgba(200,157,71,0.45)] active:scale-95">
                 Explore the Heritage
               </Link>
-              <button
-                onClick={() => setBookingProduct(null)}
-                className="inline-flex items-center gap-2 rounded-full border border-maroon/20 bg-white/60 px-6 py-3.5 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-maroon transition-all duration-300 hover:bg-maroon hover:text-gold-light hover:border-maroon hover:shadow-[0_0_25px_rgba(200,157,71,0.35)] active:scale-95"
-              >
+              <Link href="/about" className="inline-flex items-center gap-2 rounded-full border border-maroon/20 bg-white/60 px-6 py-3.5 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-maroon transition-all duration-300 hover:bg-maroon hover:text-gold-light hover:border-maroon hover:shadow-[0_0_25px_rgba(200,157,71,0.35)] active:scale-95">
                 <Calendar size={14} />
-                Book Atelier Visit
-              </button>
-              <button
-                onClick={() => setBookingProduct(null)}
-                className="inline-flex items-center gap-2 rounded-full border border-maroon/20 bg-white/60 px-6 py-3.5 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-maroon transition-all duration-300 hover:bg-maroon hover:text-gold-light hover:border-maroon hover:shadow-[0_0_25px_rgba(200,157,71,0.35)] active:scale-95"
-              >
+                Visit Our Atelier
+              </Link>
+              <Link href="/contact" className="inline-flex items-center gap-2 rounded-full border border-maroon/20 bg-white/60 px-6 py-3.5 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-maroon transition-all duration-300 hover:bg-maroon hover:text-gold-light hover:border-maroon hover:shadow-[0_0_25px_rgba(200,157,71,0.35)] active:scale-95">
                 <Video size={14} />
                 Virtual Viewing
-              </button>
+              </Link>
             </div>
 
             {/* Metal Switcher */}
@@ -170,7 +161,7 @@ export default function HomePage() {
         </div>
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {products.slice(0, 4).map((product) => (
-            <ProductCard key={product.id} product={product} onBookViewing={setBookingProduct} />
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
       </section>
@@ -223,11 +214,6 @@ export default function HomePage() {
           <Link href="/contact" className="mt-8 inline-flex items-center gap-2 rounded-full border border-maroon/20 px-8 py-3.5 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-maroon transition-all duration-300 hover:bg-maroon hover:text-gold-light hover:border-maroon hover:shadow-[0_0_25px_rgba(200,157,71,0.45)] active:scale-95">Subscribe</Link>
         </div>
       </section>
-
-      {/* Booking Modal */}
-      {bookingProduct !== undefined && (
-        <BookingModal product={bookingProduct} onClose={() => setBookingProduct(undefined as unknown as null)} />
-      )}
     </main>
   )
 }

@@ -3,8 +3,6 @@ import { useMemo, useState } from 'react'
 import { Grid3X3, LayoutList, SlidersHorizontal } from 'lucide-react'
 import { products } from '@/lib/products'
 import { ProductCard } from '@/components/product-card'
-import { BookingModal } from '@/components/booking-modal'
-import type { Product } from '@/lib/products'
 
 const categories = ['All', 'Chokers', 'Necklaces', 'Bangles', 'Earrings', 'Sets']
 
@@ -12,7 +10,6 @@ export default function ProductsPage() {
   const [category, setCategory] = useState('All')
   const [sort, setSort] = useState('Featured')
   const [view, setView] = useState<'grid' | 'list'>('grid')
-  const [bookingProduct, setBookingProduct] = useState<Product | null>(null)
 
   const filtered = useMemo(() => {
     const result = category === 'All' ? products : products.filter((p) => p.category === category)
@@ -124,7 +121,7 @@ export default function ProductsPage() {
               : 'flex flex-col gap-6'
           }>
             {filtered.map((product) => (
-              <ProductCard key={product.id} product={product} onBookViewing={setBookingProduct} />
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
 
@@ -139,8 +136,6 @@ export default function ProductsPage() {
           )}
         </section>
       </div>
-
-      <BookingModal product={bookingProduct} onClose={() => setBookingProduct(null)} />
     </main>
   )
 }

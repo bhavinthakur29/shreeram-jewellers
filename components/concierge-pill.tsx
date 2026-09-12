@@ -2,19 +2,18 @@
 
 import { Calendar, Sparkles } from 'lucide-react'
 import { useState } from 'react'
-import { BookingModal } from '@/components/booking-modal'
+import Link from 'next/link'
 
 export function ConciergePill() {
   const [hovered, setHovered] = useState(false)
-  const [showBooking, setShowBooking] = useState(false)
 
   return (
     <>
       <div className="fixed bottom-6 right-6 z-50 md:bottom-8 md:right-8">
-        <button
+        <Link
+          href="/contact"
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
-          onClick={() => setShowBooking(true)}
           className="bg-[#4A0E17]/90 backdrop-blur-xl border border-[#C89D47]/40 text-[#FAF6EE] shadow-2xl rounded-full px-5 py-3 flex items-center gap-3 cursor-pointer hover:scale-105 transition-all duration-300 hover:shadow-[0_0_30px_rgba(200,157,71,0.2)]"
         >
           <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-[#C89D47]/20">
@@ -25,13 +24,13 @@ export function ConciergePill() {
             </span>
           </div>
           <div className="hidden sm:block text-left">
-            <p className="font-sans text-[10px] font-medium uppercase tracking-[0.15em] text-[#E8D39E]">Book Jaipur Atelier Visit</p>
-            <p className="font-sans text-[8px] uppercase tracking-widest text-[#E8D39E]/50">By Appointment Only</p>
+            <p className="font-sans text-[10px] font-medium uppercase tracking-[0.15em] text-[#E8D39E]">Get in Touch</p>
+            <p className="font-sans text-[8px] uppercase tracking-widest text-[#E8D39E]/50">We&apos;ll WhatsApp You</p>
           </div>
           <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[#C89D47]/15">
             <Sparkles size={12} className="text-[#C89D47]" />
           </div>
-        </button>
+        </Link>
 
         {hovered && (
           <div className="absolute bottom-full right-0 mb-3 w-64 rounded-2xl bg-[#4A0E17]/95 backdrop-blur-xl border border-[#C89D47]/30 p-4 shadow-2xl animate-fade-in">
@@ -44,8 +43,6 @@ export function ConciergePill() {
           </div>
         )}
       </div>
-
-      {showBooking && <BookingModal product={null} onClose={() => setShowBooking(false)} />}
     </>
   )
 }
