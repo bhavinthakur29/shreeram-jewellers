@@ -1,0 +1,8 @@
+
+  echo "=== REPO TREE ==="
+  find src -maxdepth 3 -not -path '*/.*'
+  echo -e "\n=== PACKAGE JSON ==="
+  cat package.json
+  echo -e "\n=== DATA & TYPES ==="
+  find src -type f \( -path "*data*" -o -path "*types*" -o -name "*product*" -o -name "*item*" \) -exec echo -e "\n--- {} ---" \; -exec cat {} \;
+

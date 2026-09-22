@@ -1,0 +1,3808 @@
+This file is a merged representation of a subset of the codebase, containing files not matching ignore patterns, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of a subset of the repository's contents that is considered the most important context.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching these patterns are excluded: node_modules/**, .next/**, build/**, dist/**, public/**, *.lock, *.lockb
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+app/
+  about/
+    page.tsx
+  care/
+    page.tsx
+  cart/
+    page.tsx
+  checkout/
+    page.tsx
+  contact/
+    page.tsx
+  products/
+    [id]/
+      page.tsx
+    page.tsx
+  wishlist/
+    page.tsx
+  globals.css
+  layout.tsx
+  page.tsx
+components/
+  ui/
+    button.tsx
+  announcement-bar.tsx
+  booking-modal.tsx
+  cart-context.tsx
+  cart-drawer.tsx
+  collection-cards.tsx
+  concierge-pill.tsx
+  hero-slideshow.tsx
+  metal-ticker.tsx
+  mobile-bottom-nav.tsx
+  pincode-checker.tsx
+  product-card.tsx
+  reviews-section.tsx
+  search-modal.tsx
+  site-footer.tsx
+  site-header.tsx
+  wishlist-context.tsx
+lib/
+  products.ts
+  utils.ts
+.gitignore
+components.json
+next-env.d.ts
+next.config.mjs
+package.json
+pnpm-workspace.yaml
+postcss.config.mjs
+project-state.txt
+tsconfig.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="project-state.txt">
+echo "=== REPO TREE ==="
+  find src -maxdepth 3 -not -path '*/.*'
+  echo -e "\n=== PACKAGE JSON ==="
+  cat package.json
+  echo -e "\n=== DATA & TYPES ==="
+  find src -type f \( -path "*data*" -o -path "*types*" -o -name "*product*" -o -name "*item*" \) -exec echo -e "\n--- {} ---" \; -exec cat {} \;
+</file>
+
+<file path="app/about/page.tsx">
+import { Hammer, Leaf, ShieldCheck } from 'lucide-react'
+
+export default function AboutPage() {
+  return (
+    <main>
+      <section className="relative flex min-h-[480px] items-center justify-center overflow-hidden bg-[#F5F0E5]">
+        <img src="/atelier.png" alt="Shreeram Jewellers atelier in Jaipur" className="absolute inset-0 h-full w-full object-cover brightness-75" />
+        <div className="relative text-center text-gold-light">
+          <p className="font-sans text-[9px] uppercase tracking-[0.3em] text-gold/80">The Atelier &bull; Jaipur, Rajasthan</p>
+          <h1 className="mt-5 font-serif text-5xl md:text-6xl">The Shreeram Legacy</h1>
+        </div>
+      </section>
+
+      <section className="mx-auto grid max-w-[1280px] gap-12 px-6 py-24 md:grid-cols-2 md:px-20">
+        <div className="relative">
+          <div className="absolute -inset-4 rounded-t-[3rem] bg-gradient-to-br from-gold/10 to-transparent" />
+          <img src="/atelier.png" alt="Master karigar at work in Jaipur" className="relative aspect-square rounded-t-[2.5rem] rounded-b-2xl object-cover border border-gold/20 p-1 bg-white/30 shadow-lg" />
+        </div>
+        <div className="self-center">
+          <div className="flex items-center gap-3">
+            <div className="h-px w-8 bg-gold/40" />
+            <p className="font-sans text-[9px] uppercase tracking-[0.3em] text-gold-dark">Our Heritage</p>
+          </div>
+          <h2 className="mt-5 font-serif text-4xl text-maroon">A Legacy of Sacred Karigari</h2>
+          <p className="mt-7 font-sans leading-7 text-maroon/50">
+            Founded in the heart of Jaipur&apos;s Johari Bazar in 1952, Shreeram Jewellers was built upon a sacred promise: to preserve and elevate India&apos;s richest jewellery traditions. Spanning three generations of master karigars, our atelier has remained dedicated to hand-forging Jadau, Polki, Kundan, and temple gold pieces that stand as testaments to timeless artistry.
+          </p>
+          <p className="mt-5 font-sans leading-7 text-maroon/50">
+            Every piece that leaves our Jaipur workshop carries the soul of Rajasthan — the patience of meenakari enamel work, the precision of kundan setting, and the devotion of temple gold craftsmanship passed down through centuries.
+          </p>
+        </div>
+      </section>
+
+      <section className="border-y border-[#C89D47]/15 bg-[#F5F0E5] px-6 py-24 md:px-20">
+        <div className="mx-auto max-w-[1280px] text-center">
+          <div className="flex items-center justify-center gap-4">
+            <div className="h-px w-16 bg-gold/40" />
+            <p className="font-sans text-[9px] uppercase tracking-[0.3em] text-gold-dark">Our Craft</p>
+            <div className="h-px w-16 bg-gold/40" />
+          </div>
+          <h2 className="mt-4 font-serif text-4xl text-maroon">Three Pillars of Heritage</h2>
+          <div className="mt-16 grid gap-8 md:grid-cols-3">
+            {[
+              [Hammer, 'Jadau & Polki', 'The ancient art of setting uncut diamonds and gemstones into molten gold, practiced by Jaipur\'s master karigars for over 500 years.'],
+              [Leaf, 'Meenakari Enamel', 'Hand-ground mineral enamels fired at precise temperatures to create the vibrant, lasting colours of Rajasthani meenakari.'],
+              [ShieldCheck, 'Certified Excellence', 'Every piece is BIS Hallmarked 916 Gold. Diamonds are GIA & IGI certified. Basra pearls are laboratory verified.'],
+            ].map(([Icon, title, desc]) => (
+              <div key={title as string} className="bg-white/70 backdrop-blur-lg border border-[#C89D47]/25 rounded-2xl p-10 shadow-[0_8px_24px_rgba(74,14,23,0.04)]">
+                <Icon className="text-gold-dark" size={24} />
+                <h3 className="mt-8 font-serif text-xl text-maroon">{title as string}</h3>
+                <p className="mt-4 font-sans text-sm leading-6 text-maroon/50">{desc as string}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1280px] px-6 py-24 md:px-20">
+        <div className="text-center">
+          <p className="font-sans text-[9px] uppercase tracking-[0.3em] text-gold-dark">The Jaipur Atelier</p>
+          <h2 className="mt-4 font-serif text-4xl text-maroon">Visit Our Showroom</h2>
+          <p className="mx-auto mt-5 max-w-lg font-sans text-sm leading-7 text-maroon/50">
+            Our flagship showroom at Johari Bazar / MI Road, Jaipur is open by private appointment. Experience our heritage collections in person with a dedicated stylist.
+          </p>
+          <div className="mt-8 inline-flex flex-col items-center gap-2 rounded-2xl border border-[#C89D47]/20 bg-white/60 px-8 py-6">
+            <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-maroon/50">Flagship Showroom</p>
+            <p className="font-serif text-lg text-maroon">Johari Bazar / MI Road</p>
+            <p className="font-sans text-sm text-maroon/50">Jaipur, Rajasthan 302001</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  )
+}
+</file>
+
+<file path="app/care/page.tsx">
+'use client'
+import { useState } from 'react'
+import { Box, Droplets, Sparkles, Shield } from 'lucide-react'
+
+export default function CarePage() {
+  const [open, setOpen] = useState(2)
+
+  const faqs = [
+    { q: 'What are your shipping timeframes?', a: 'Ready-to-ship pieces dispatch within 2-3 business days. Custom bespoke orders take 4-8 weeks depending on complexity. All shipments are insured and tracked pan-India.' },
+    { q: 'Do you offer international shipping?', a: 'Yes, we offer insured global delivery to over 40 countries. International orders are shipped via insured courier with full tracking. Please contact our concierge for international shipping rates.' },
+    { q: 'What is your returns policy?', a: 'We offer a 7-day return policy for unworn pieces in original packaging. Custom bespoke and bridal orders are non-returnable. BIS hallmark certification accompanies every return.' },
+    { q: 'What warranty is provided with purchases?', a: 'All Shreeram Jewellers pieces come with a lifetime craftsmanship warranty. This covers manufacturing defects, stone settings, and clasp repairs. BIS 916 hallmark certification is provided with every gold piece.' },
+    { q: 'How long do custom bespoke orders take?', a: 'Custom Jadau and Polki pieces typically require 6-12 weeks. Temple gold and Meenakari work takes 4-8 weeks. Your dedicated concierge will provide a detailed timeline during your consultation.' },
+  ]
+
+  return (
+    <main>
+      <section className="mx-auto max-w-[1280px] px-6 py-16 md:px-20">
+        <div className="flex items-center gap-3">
+          <div className="h-px w-8 bg-gold/40" />
+          <p className="font-sans text-[9px] uppercase tracking-[0.3em] text-gold-dark">Concierge</p>
+        </div>
+        <h1 className="mt-5 font-serif text-5xl text-maroon">Heritage Care</h1>
+        <p className="mt-5 max-w-xl font-sans text-maroon/50">
+          Our dedicated heritage concierge team guides you through every step of your jewellery journey — from Jaipur atelier visits to global insured delivery.
+        </p>
+
+        <h2 className="mt-20 font-serif text-4xl text-maroon">Preserving Sacred Radiance</h2>
+        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {[
+            [Box, 'Heritage Storage'],
+            [Droplets, 'Gentle Cleansing'],
+            [Sparkles, 'Daily Wear Rituals'],
+            [Shield, 'Professional Service'],
+          ].map(([Icon, title]) => (
+            <div key={title as string} className="bg-white/70 backdrop-blur-lg border border-[#C89D47]/25 rounded-2xl p-8 shadow-[0_8px_24px_rgba(74,14,23,0.04)]">
+              <Icon className="text-gold-dark" />
+              <h3 className="mt-8 font-serif text-xl text-maroon">{title as string}</h3>
+              <p className="mt-4 font-sans text-sm leading-6 text-maroon/50">
+                Keep your heritage jewellery individually cared for with gentle, considered rituals befitting pieces crafted in Jaipur&apos;s atelier.
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="border-y border-[#C89D47]/15 bg-[#F5F0E5] px-6 py-20 md:px-20">
+        <div className="mx-auto max-w-[1280px]">
+          <div className="flex items-center justify-center gap-4">
+            <div className="h-px w-16 bg-gold/40" />
+            <p className="text-center font-sans text-[9px] uppercase tracking-[0.3em] text-gold-dark">Questions</p>
+            <div className="h-px w-16 bg-gold/40" />
+          </div>
+          <h2 className="mt-4 text-center font-serif text-4xl text-maroon">Frequently Asked Questions</h2>
+          <div className="mt-12 max-w-[800px] mx-auto space-y-4">
+            {faqs.map((faq, i) => (
+              <div key={i} className="bg-white/70 backdrop-blur-lg border border-[#C89D47]/25 rounded-2xl overflow-hidden shadow-[0_8px_24px_rgba(74,14,23,0.04)]">
+                <button
+                  onClick={() => setOpen(open === i ? -1 : i)}
+                  className="flex w-full items-center justify-between px-6 py-5 text-left"
+                >
+                  <span className="font-serif text-base text-maroon">{faq.q}</span>
+                  <span className="ml-4 shrink-0 font-sans text-lg text-maroon/30">{open === i ? '−' : '+'}</span>
+                </button>
+                {open === i && (
+                  <div className="px-6 pb-5 border-t border-[#C89D47]/10 pt-4">
+                    <p className="font-sans text-sm leading-6 text-maroon/50">{faq.a}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+  )
+}
+</file>
+
+<file path="app/cart/page.tsx">
+'use client'
+import Link from 'next/link'
+import { Minus, Plus, Trash2, MessageCircle } from 'lucide-react'
+import { useCart } from '@/components/cart-context'
+import { formatPrice, products } from '@/lib/products'
+
+export default function CartPage() {
+  const { lines, subtotal, update, remove } = useCart()
+  const displayLines = lines.length ? lines : products.slice(0, 3).map((product) => ({ product, quantity: 1 }))
+  const total = displayLines.reduce((sum, line) => sum + line.product.price * line.quantity, 0)
+
+  return (
+    <main className="mx-auto max-w-[1280px] px-6 py-14 md:px-20 md:py-16">
+      <h1 className="font-serif text-5xl text-maroon">Your Heritage Bag</h1>
+      <p className="mt-3 font-sans text-sm text-maroon/50">({displayLines.reduce((sum, line) => sum + line.quantity, 0)} pieces)</p>
+
+      <div className="mt-8 grid gap-12 lg:grid-cols-[1fr_380px]">
+        <section>
+          {displayLines.map((line) => (
+            <div key={line.product.id} className="flex flex-wrap items-center gap-6 border-t border-[#C89D47]/10 py-8">
+              <img src={line.product.image} alt={line.product.name} style={{ objectPosition: line.product.position }} className="h-28 w-28 rounded-2xl object-cover border border-[#C89D47]/10" />
+              <div className="min-w-[180px] flex-1">
+                <h2 className="font-serif text-xl text-maroon">{line.product.name}</h2>
+                <p className="mt-1 font-sans text-[9px] uppercase tracking-[0.15em] text-maroon/30">{line.product.code}</p>
+                <p className="mt-2 max-w-lg font-sans text-sm text-maroon/50 line-clamp-2">{line.product.description}</p>
+                <p className="mt-3 font-sans text-[9px] uppercase tracking-[0.15em] text-gold-dark">22KT BIS Hallmarked</p>
+              </div>
+              <div className="flex items-center rounded-xl border border-[#E5DDD0]">
+                <button onClick={() => line.product && update(line.product.id, line.quantity - 1)} className="p-3 text-maroon/40 hover:text-maroon"><Minus size={13} /></button>
+                <span className="min-w-[32px] text-center font-sans text-sm text-maroon">{line.quantity}</span>
+                <button onClick={() => line.product && update(line.product.id, line.quantity + 1)} className="p-3 text-maroon/40 hover:text-maroon"><Plus size={13} /></button>
+              </div>
+              <div className="w-28 text-right">
+                <span className="font-sans text-sm font-medium text-maroon">{formatPrice(line.product.price * line.quantity)}</span>
+                <button onClick={() => remove(line.product.id)} className="mt-2 flex items-center gap-1 text-xs text-maroon/30 hover:text-[#B33A3A]"><Trash2 size={12} /> Remove</button>
+              </div>
+            </div>
+          ))}
+          <Link href="/products" className="mt-6 inline-flex items-center gap-2 font-sans text-[10px] uppercase tracking-[0.2em] text-gold-dark transition-colors hover:text-maroon">
+            Continue Exploring Heritage
+          </Link>
+        </section>
+
+        <aside className="h-fit bg-white/70 backdrop-blur-lg border border-[#C89D47]/25 rounded-2xl p-8 shadow-[0_8px_24px_rgba(74,14,23,0.04)]">
+          <h2 className="font-serif text-xl text-maroon">Order Summary</h2>
+          <div className="mt-6 space-y-3 font-sans text-sm">
+            <div className="flex justify-between text-maroon/50">
+              <span>Subtotal</span>
+              <span>{formatPrice(subtotal || total)}</span>
+            </div>
+            <div className="flex justify-between text-maroon/50">
+              <span>Insured Shipping</span>
+              <span className="text-emerald-heritage">Complimentary</span>
+            </div>
+            <div className="my-2 border-t border-[#E5DDD0] pt-3">
+              <div className="flex justify-between font-sans text-base">
+                <span className="font-medium text-maroon">Total</span>
+                <span className="font-serif text-xl text-maroon">{formatPrice(subtotal || total)}</span>
+              </div>
+            </div>
+          </div>
+
+          <Link href="/checkout" className="mt-6 flex h-12 w-full items-center justify-center rounded-full bg-maroon border border-gold/40 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold-light transition-all duration-300 hover:bg-maroon-dark hover:shadow-[0_0_20px_rgba(200,157,71,0.25)]">
+            Proceed to Checkout
+          </Link>
+
+          <a
+            href={`https://wa.me/9198XXXXXXXX?text=${encodeURIComponent('Hi, I would like to enquire about the items in my bag.')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 flex h-12 w-full items-center justify-center gap-2 rounded-full border border-[#25D366]/30 bg-[#25D366]/5 font-sans text-[10px] font-medium uppercase tracking-[0.15em] text-[#25D366] transition-all duration-300 hover:bg-[#25D366]/10"
+          >
+            <MessageCircle size={13} />
+            Enquire on WhatsApp
+          </a>
+        </aside>
+      </div>
+    </main>
+  )
+}
+</file>
+
+<file path="app/checkout/page.tsx">
+'use client'
+import Link from 'next/link'
+import { useState } from 'react'
+import { Check, MessageCircle } from 'lucide-react'
+import { useCart } from '@/components/cart-context'
+import { formatPrice } from '@/lib/products'
+
+export default function CheckoutPage() {
+  const { subtotal } = useCart()
+  const [complete, setComplete] = useState(false)
+
+  const total = subtotal || 345000
+
+  if (complete) {
+    return (
+      <main className="mx-auto max-w-2xl px-6 py-28 text-center">
+        <Check className="mx-auto text-gold" size={48} strokeWidth={1.5} />
+        <h1 className="mt-6 font-serif text-5xl text-maroon">Dhanyavaad</h1>
+        <p className="mt-4 font-sans text-maroon/50">
+          Your Shreeram Jewellers order has been received. A heritage concierge will confirm your order via WhatsApp within 2 hours.
+        </p>
+        <Link href="/" className="mt-8 inline-flex rounded-full bg-maroon border border-gold/40 px-8 py-3.5 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold-light transition-all duration-300 hover:bg-maroon-dark">
+          Return Home
+        </Link>
+      </main>
+    )
+  }
+
+  return (
+    <main>
+      <div className="border-b border-[#C89D47]/10 py-8">
+        <div className="mx-auto flex max-w-4xl items-center justify-center gap-8 font-sans text-sm">
+          <span className="flex items-center gap-2 text-maroon">
+            <b className="flex h-6 w-6 items-center justify-center rounded-full bg-maroon text-gold-light text-xs">1</b> Shipping
+          </span>
+          <span className="text-maroon/30">2&nbsp; Payment</span>
+          <span className="text-maroon/30">3&nbsp; Review</span>
+        </div>
+      </div>
+
+      <div className="mx-auto grid max-w-[1280px] gap-12 px-6 py-14 md:px-20 lg:grid-cols-[1fr_380px]">
+        <section>
+          <h1 className="font-serif text-4xl text-maroon">Shipping Information</h1>
+          <form onSubmit={(e) => { e.preventDefault(); setComplete(true) }} className="mt-8 space-y-5">
+            <label className="block font-sans text-[10px] uppercase tracking-[0.2em] text-maroon">
+              Full Name *
+              <input required className="mt-2 h-12 w-full rounded-xl border border-[#E5DDD0] bg-[#FAF6EE]/60 px-4 text-sm normal-case text-maroon outline-none focus:border-gold focus:ring-2 focus:ring-gold/10 transition-all" placeholder="Your full name" />
+            </label>
+            <label className="block font-sans text-[10px] uppercase tracking-[0.2em] text-maroon">
+              WhatsApp Number *
+              <input required type="tel" className="mt-2 h-12 w-full rounded-xl border border-[#E5DDD0] bg-[#FAF6EE]/60 px-4 text-sm normal-case text-maroon outline-none focus:border-gold focus:ring-2 focus:ring-gold/10 transition-all" placeholder="+91 98XXX XXXXX" />
+            </label>
+            <label className="block font-sans text-[10px] uppercase tracking-[0.2em] text-maroon">
+              Email Address *
+              <input required type="email" className="mt-2 h-12 w-full rounded-xl border border-[#E5DDD0] bg-[#FAF6EE]/60 px-4 text-sm normal-case text-maroon outline-none focus:border-gold focus:ring-2 focus:ring-gold/10 transition-all" placeholder="your@email.com" />
+            </label>
+            <label className="block font-sans text-[10px] uppercase tracking-[0.2em] text-maroon">
+              Delivery Address *
+              <textarea required rows={3} className="mt-2 w-full rounded-xl border border-[#E5DDD0] bg-[#FAF6EE]/60 p-4 text-sm normal-case text-maroon outline-none focus:border-gold focus:ring-2 focus:ring-gold/10 transition-all" placeholder="Full address with PIN code" />
+            </label>
+
+            <div className="pt-4">
+              <button type="submit" className="flex h-12 w-full items-center justify-center rounded-full bg-maroon border border-gold/40 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold-light transition-all duration-300 hover:bg-maroon-dark hover:shadow-[0_0_25px_rgba(200,157,71,0.45)] active:scale-[0.98]">
+                Place Order
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <aside className="h-fit bg-white/70 backdrop-blur-lg border border-[#C89D47]/25 rounded-2xl p-8 shadow-[0_8px_24px_rgba(74,14,23,0.04)]">
+          <h2 className="font-serif text-xl text-maroon">Order Summary</h2>
+          <div className="mt-6 space-y-3 font-sans text-sm">
+            <div className="flex justify-between text-maroon/50">
+              <span>Subtotal</span>
+              <span>{formatPrice(total)}</span>
+            </div>
+            <div className="flex justify-between text-maroon/50">
+              <span>Insured Shipping</span>
+              <span className="text-emerald-heritage">Complimentary</span>
+            </div>
+            <div className="flex justify-between text-maroon/50">
+              <span> GST (Est.)</span>
+              <span>{formatPrice(Math.round(total * 0.03))}</span>
+            </div>
+            <div className="my-2 border-t border-[#E5DDD0] pt-3">
+              <div className="flex justify-between font-sans text-base">
+                <span className="font-medium text-maroon">Total</span>
+                <span className="font-serif text-xl text-maroon">{formatPrice(Math.round(total * 1.03))}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-4 flex items-center gap-2 text-maroon/30">
+            <span className="font-sans text-[10px]">BIS Hallmarked &amp; GIA/IGI Certified</span>
+          </div>
+
+          <a
+            href={`https://wa.me/9198XXXXXXXX?text=${encodeURIComponent('Hi, I would like to proceed with my order.')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 flex h-12 w-full items-center justify-center gap-2 rounded-full border border-[#25D366]/30 bg-[#25D366]/5 font-sans text-[10px] font-medium uppercase tracking-[0.15em] text-[#25D366] transition-all duration-300 hover:bg-[#25D366]/10"
+          >
+            <MessageCircle size={13} />
+            Enquire on WhatsApp
+          </a>
+        </aside>
+      </div>
+    </main>
+  )
+}
+</file>
+
+<file path="app/contact/page.tsx">
+'use client'
+import { useState } from 'react'
+
+export default function ContactPage() {
+  const [sent, setSent] = useState(false)
+
+  return (
+    <main className="mx-auto max-w-[1280px] px-6 py-16 md:px-20 md:py-20">
+      <div className="flex items-center gap-3">
+        <div className="h-px w-8 bg-gold/40" />
+        <p className="font-sans text-[9px] uppercase tracking-[0.3em] text-gold-dark">Concierge</p>
+      </div>
+      <h1 className="mt-5 font-serif text-5xl text-maroon">Get in Touch</h1>
+      <p className="mt-5 max-w-xl font-sans text-maroon/50">
+        Whether seeking bridal collection assistance, custom bespoke estimates, or a private showroom booking at our Jaipur atelier, our heritage advisors are at your service.
+      </p>
+
+      <div className="mt-12 grid gap-12 lg:grid-cols-2">
+        {/* Form */}
+        <form onSubmit={(e) => { e.preventDefault(); setSent(true) }} className="bg-white/70 backdrop-blur-lg border border-[#C89D47]/25 rounded-2xl p-8 md:p-10 shadow-[0_8px_24px_rgba(74,14,23,0.04)]">
+          <h2 className="font-serif text-3xl text-maroon">{sent ? 'Dhanyavaad' : 'Send an Inquiry'}</h2>
+          {sent ? (
+            <p className="mt-6 font-sans text-maroon/50">Your message has been received. A heritage concierge will be in touch shortly.</p>
+          ) : (
+            <div className="mt-8 space-y-5">
+              {['Full Name', 'Email Address', 'WhatsApp Number'].map((label) => (
+                <label key={label} className="block font-sans text-[10px] uppercase tracking-[0.2em] text-maroon">
+                  {label} *
+                  <input required placeholder={label} className="mt-2 h-12 w-full rounded-xl border border-[#E5DDD0] bg-[#FAF6EE]/60 px-4 text-sm normal-case text-maroon placeholder:text-maroon/30 focus:border-gold focus:ring-2 focus:ring-gold/10 outline-none transition-all" />
+                </label>
+              ))}
+              <label className="block font-sans text-[10px] uppercase tracking-[0.2em] text-maroon">
+                Category of Interest
+                <select className="mt-2 h-12 w-full rounded-xl border border-[#E5DDD0] bg-[#FAF6EE]/60 px-4 text-sm normal-case text-maroon focus:border-gold focus:ring-2 focus:ring-gold/10 outline-none transition-all">
+                  <option>Select a category</option>
+                  <option>Bridal Trousseau</option>
+                  <option>Daily Wear Gold</option>
+                  <option>Polki / Jadau</option>
+                  <option>Custom Commission</option>
+                </select>
+              </label>
+              <label className="block font-sans text-[10px] uppercase tracking-[0.2em] text-maroon">
+                Message *
+                <textarea required rows={5} placeholder="Describe what you are looking for..." className="mt-2 w-full rounded-xl border border-[#E5DDD0] bg-[#FAF6EE]/60 p-4 text-sm normal-case text-maroon placeholder:text-maroon/30 focus:border-gold focus:ring-2 focus:ring-gold/10 outline-none transition-all" />
+              </label>
+              <button type="submit" className="mt-2 flex h-12 w-full items-center justify-center rounded-full bg-maroon border border-gold/40 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold-light transition-all duration-300 hover:bg-maroon-dark hover:shadow-[0_0_25px_rgba(200,157,71,0.45)] active:scale-[0.98]">
+                Send Inquiry
+              </button>
+            </div>
+          )}
+        </form>
+
+        {/* Contact Details */}
+        <div className="space-y-8">
+          <div className="bg-white/70 backdrop-blur-lg border border-[#C89D47]/25 rounded-2xl p-8 shadow-[0_8px_24px_rgba(74,14,23,0.04)]">
+            <h3 className="font-serif text-xl text-maroon">Visit Our Atelier</h3>
+            <div className="mt-6 space-y-4">
+              <div>
+                <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-gold-dark">Flagship Showroom</p>
+                <p className="mt-1 font-sans text-sm text-maroon/60">Johari Bazar / MI Road</p>
+                <p className="font-sans text-sm text-maroon/60">Jaipur, Rajasthan 302001</p>
+              </div>
+              <div>
+                <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-gold-dark">By Appointment</p>
+                <p className="mt-1 font-sans text-sm text-maroon/60">+91 98XXX XXXXX</p>
+                <p className="font-sans text-sm text-maroon/60">heritage@shreeramjewellers.in</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white/70 backdrop-blur-lg border border-[#C89D47]/25 rounded-2xl p-8 shadow-[0_8px_24px_rgba(74,14,23,0.04)]">
+            <h3 className="font-serif text-xl text-maroon">Services</h3>
+            <div className="mt-6 space-y-3">
+              {['Book Jaipur Atelier Visit', 'Schedule Virtual Video Viewing', 'Custom Bespoke Commission', 'Bridal Trousseau Consultation'].map((item) => (
+                <div key={item} className="flex items-center gap-3">
+                  <span className="h-1 w-1 rounded-full bg-gold" />
+                  <span className="font-sans text-sm text-maroon/60">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-white/70 backdrop-blur-lg border border-[#C89D47]/25 rounded-2xl p-8 shadow-[0_8px_24px_rgba(74,14,23,0.04)]">
+            <h3 className="font-serif text-xl text-maroon">Heritage Hours</h3>
+            <div className="mt-6 space-y-2">
+              <div className="flex justify-between">
+                <span className="font-sans text-sm text-maroon/60">Monday – Saturday</span>
+                <span className="font-sans text-sm text-maroon">10:00 AM – 7:00 PM</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-sans text-sm text-maroon/60">Sunday</span>
+                <span className="font-sans text-sm text-maroon">By Appointment Only</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  )
+}
+</file>
+
+<file path="app/wishlist/page.tsx">
+'use client'
+
+import Link from 'next/link'
+import { Heart, Trash2, ShoppingBag } from 'lucide-react'
+import { useWishlist } from '@/components/wishlist-context'
+import { useCart } from '@/components/cart-context'
+import { formatPrice } from '@/lib/products'
+
+export default function WishlistPage() {
+  const { items, remove } = useWishlist()
+  const { add } = useCart()
+
+  return (
+    <main className="mx-auto max-w-[1280px] px-6 py-14 md:px-20 md:py-16 min-h-[60vh]">
+      <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-maroon/40">
+        Home&nbsp; / &nbsp;<span className="text-maroon">Wishlist</span>
+      </p>
+      <h1 className="mt-5 font-serif text-5xl text-maroon md:text-6xl">My Wishlist</h1>
+      <p className="mt-3 font-sans text-sm text-maroon/40">
+        {items.length} {items.length === 1 ? 'piece' : 'pieces'} saved
+      </p>
+
+      {items.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-24 text-center">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-maroon/5">
+            <Heart size={32} className="text-maroon/20" />
+          </div>
+          <h2 className="mt-6 font-serif text-2xl text-maroon">Your wishlist is empty</h2>
+          <p className="mt-2 max-w-sm font-sans text-sm text-maroon/40">
+            Save your favourite heritage pieces here for later.
+          </p>
+          <Link
+            href="/products"
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-maroon border border-gold/40 px-8 py-3.5 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold-light transition-all duration-300 hover:bg-maroon-dark hover:shadow-[0_0_25px_rgba(200,157,71,0.45)]"
+          >
+            Explore Collections
+          </Link>
+        </div>
+      ) : (
+        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {items.map((product) => (
+            <article key={product.id} className="group bg-white/70 backdrop-blur-lg border border-[#C89D47]/25 rounded-2xl overflow-hidden shadow-[0_8px_24px_rgba(74,14,23,0.04)]">
+              <div className="relative aspect-[4/5] overflow-hidden bg-[#FAF6EE]">
+                <Link href={`/products/${product.id}`}>
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    style={{ objectPosition: product.position }}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  />
+                </Link>
+                <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
+                  {product.tags.slice(0, 2).map((tag) => (
+                    <span key={tag} className="inline-block rounded-full bg-maroon/80 backdrop-blur-md px-2.5 py-1 font-sans text-[8px] uppercase tracking-[0.1em] text-gold-light">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="p-4">
+                <p className="font-sans text-[8px] uppercase tracking-[0.2em] text-maroon/30">{product.code}</p>
+                <Link href={`/products/${product.id}`} className="mt-1 block font-serif text-base text-maroon hover:text-gold-dark transition-colors">
+                  {product.name}
+                </Link>
+                <p className="mt-1 font-sans text-sm font-medium text-gold-dark">{formatPrice(product.price)}</p>
+                <div className="mt-4 flex gap-2">
+                  <button
+                    onClick={() => {
+                      add(product)
+                      remove(product.id)
+                    }}
+                    className="flex flex-1 items-center justify-center gap-2 rounded-full border border-maroon/20 bg-maroon/5 px-3 py-2.5 font-sans text-[9px] font-medium uppercase tracking-[0.1em] text-maroon transition-all duration-300 hover:bg-maroon hover:text-gold-light hover:border-maroon"
+                  >
+                    <ShoppingBag size={12} /> Add to Cart
+                  </button>
+                  <button
+                    onClick={() => remove(product.id)}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-maroon/10 text-maroon/30 transition-colors hover:border-red-300 hover:text-red-400"
+                    aria-label="Remove from wishlist"
+                  >
+                    <Trash2 size={14} />
+                  </button>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </main>
+  )
+}
+</file>
+
+<file path="components/ui/button.tsx">
+import { Button as ButtonPrimitive } from '@base-ui/react/button'
+import { cva, type VariantProps } from 'class-variance-authority'
+import { cn } from '@/lib/utils'
+
+const buttonVariants = cva(
+  "group/button inline-flex shrink-0 items-center justify-center rounded-full border border-transparent text-[10px] font-medium uppercase tracking-[0.2em] whitespace-nowrap transition-all duration-300 outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  {
+    variants: {
+      variant: {
+        default: 'border-maroon bg-maroon text-gold-light hover:bg-maroon-dark hover:shadow-[0_0_20px_rgba(200,157,71,0.25)]',
+        outline: 'border-[#E5DDD0] bg-transparent text-maroon/70 hover:bg-[#F5F0E5] hover:border-gold/30',
+        secondary: 'border-[#C89D47]/20 bg-[#F5F0E5] text-maroon/70 hover:bg-[#EDE8DB]',
+        ghost: 'border-transparent text-maroon/50 hover:bg-[#F5F0E5] hover:text-maroon',
+        destructive: 'border-destructive/30 bg-destructive/10 text-destructive hover:bg-destructive/20',
+        link: 'border-transparent text-gold-dark underline-offset-4 hover:text-maroon hover:underline',
+        gold: 'border-gold bg-gold text-maroon hover:bg-gold-dark hover:shadow-[0_0_20px_rgba(200,157,71,0.25)]',
+      },
+      size: {
+        default: 'h-10 gap-1.5 px-6',
+        xs: "h-7 gap-1 px-3 text-[9px]",
+        sm: "h-8 gap-1 px-4 text-[9px]",
+        lg: 'h-12 gap-1.5 px-8',
+        icon: 'size-10 rounded-full',
+        'icon-xs': "size-7 rounded-full text-[9px]",
+        'icon-sm': 'size-8 rounded-full',
+        'icon-lg': 'size-12 rounded-full',
+      },
+    },
+    defaultVariants: { variant: 'default', size: 'default' },
+  },
+)
+
+function Button({ className, variant = 'default', size = 'default', ...props }: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
+  return <ButtonPrimitive data-slot="button" className={cn(buttonVariants({ variant, size, className }))} {...props} />
+}
+
+export { Button, buttonVariants }
+</file>
+
+<file path="components/announcement-bar.tsx">
+'use client'
+
+import { useState, useEffect } from 'react'
+import { announcements } from '@/lib/products'
+import { ChevronLeft, ChevronRight, X } from 'lucide-react'
+
+export function AnnouncementBar() {
+  const [current, setCurrent] = useState(0)
+  const [visible, setVisible] = useState(true)
+
+  useEffect(() => {
+    if (!visible) return
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % announcements.length)
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [visible])
+
+  if (!visible) return null
+
+  return (
+    <div className="relative bg-maroon text-gold-light overflow-hidden z-[60]">
+      <div className="mx-auto flex items-center justify-center h-9 px-4">
+        <button
+          onClick={() => setCurrent((prev) => (prev - 1 + announcements.length) % announcements.length)}
+          className="absolute left-4 text-gold-light/60 hover:text-gold-light transition-colors"
+          aria-label="Previous announcement"
+        >
+          <ChevronLeft size={14} />
+        </button>
+
+        <div className="relative h-5 overflow-hidden">
+          {announcements.map((text, i) => (
+            <p
+              key={i}
+              className={`absolute inset-0 flex items-center justify-center font-sans text-[10px] uppercase tracking-[0.2em] transition-all duration-500 ${
+                i === current ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+              }`}
+            >
+              {text}
+            </p>
+          ))}
+        </div>
+
+        <button
+          onClick={() => setCurrent((prev) => (prev + 1) % announcements.length)}
+          className="absolute right-10 text-gold-light/60 hover:text-gold-light transition-colors"
+          aria-label="Next announcement"
+        >
+          <ChevronRight size={14} />
+        </button>
+
+        <button
+          onClick={() => setVisible(false)}
+          className="absolute right-3 text-gold-light/40 hover:text-gold-light transition-colors"
+          aria-label="Close announcement"
+        >
+          <X size={12} />
+        </button>
+      </div>
+    </div>
+  )
+}
+</file>
+
+<file path="components/booking-modal.tsx">
+'use client'
+
+import { X, Calendar, Video, MapPin } from 'lucide-react'
+import { useState } from 'react'
+import type { Product } from '@/lib/products'
+
+type BookingType = 'atelier' | 'virtual'
+
+const categories = ['Bridal Trousseau', 'Daily Wear Gold', 'Polki / Jadau', 'Custom Commission', 'Not Sure Yet']
+
+export function BookingModal({ product, onClose }: { product: Product | null; onClose: () => void }) {
+  const [bookingType, setBookingType] = useState<BookingType>('atelier')
+  const [submitted, setSubmitted] = useState(false)
+  const [form, setForm] = useState({
+    name: '',
+    whatsapp: '',
+    date: '',
+    category: '',
+  })
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setSubmitted(true)
+  }
+
+  return (
+    <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-maroon/20 backdrop-blur-sm" onClick={onClose} />
+
+      {/* Modal */}
+      <div className="relative w-full max-w-[520px] max-h-[90vh] overflow-y-auto rounded-3xl bg-[#FAF6EE]/98 backdrop-blur-2xl border border-[#C89D47]/25 shadow-2xl shadow-maroon/10">
+        {/* Header */}
+        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-[#C89D47]/10 bg-[#FAF6EE]/95 backdrop-blur-xl px-6 py-5 rounded-t-3xl">
+          <div>
+            <h2 className="font-serif text-xl text-maroon">Book a Private Viewing</h2>
+            <p className="mt-0.5 font-sans text-[10px] uppercase tracking-[0.15em] text-maroon/40">At our Jaipur Atelier or Virtually</p>
+          </div>
+          <button
+            onClick={onClose}
+            aria-label="Close"
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-maroon/10 text-maroon/40 transition-colors hover:border-maroon/20 hover:text-maroon"
+          >
+            <X size={14} />
+          </button>
+        </div>
+
+        {submitted ? (
+          <div className="px-6 py-16 text-center">
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gold/10">
+              <Calendar size={24} className="text-gold-dark" />
+            </div>
+            <h3 className="mt-6 font-serif text-2xl text-maroon">Dhanyavaad</h3>
+            <p className="mt-3 font-sans text-sm text-maroon/50">
+              Your viewing request has been received. A heritage concierge will WhatsApp you within 2 hours to confirm your appointment.
+            </p>
+            <button
+              onClick={onClose}
+              className="mt-8 rounded-full border border-maroon/20 px-8 py-3 font-sans text-[10px] uppercase tracking-[0.2em] text-maroon transition-all duration-300 hover:bg-maroon hover:text-gold-light hover:border-maroon"
+            >
+              Close
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="px-6 py-6">
+            {/* Selected Product */}
+            {product && (
+              <div className="mb-6 flex items-center gap-4 rounded-2xl bg-white/60 border border-[#C89D47]/15 p-4">
+                <img src={product.image} alt={product.name} className="h-16 w-16 rounded-xl object-cover" />
+                <div>
+                  <p className="font-sans text-[9px] uppercase tracking-[0.15em] text-maroon/40">{product.code}</p>
+                  <p className="font-serif text-sm text-maroon">{product.name}</p>
+                </div>
+              </div>
+            )}
+
+            {/* Booking Type Toggle */}
+            <div className="mb-6">
+              <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.2em] text-maroon/50">Select Viewing Type</p>
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() => setBookingType('atelier')}
+                  className={`flex items-center gap-3 rounded-2xl border p-4 text-left transition-all duration-300 ${
+                    bookingType === 'atelier'
+                      ? 'border-gold bg-maroon text-gold-light shadow-[0_0_20px_rgba(200,157,71,0.15)]'
+                      : 'border-[#C89D47]/20 bg-white/60 text-maroon hover:border-gold/40'
+                  }`}
+                >
+                  <MapPin size={18} />
+                  <div>
+                    <p className="font-sans text-[11px] font-medium uppercase tracking-[0.1em]">Jaipur Atelier</p>
+                    <p className="mt-0.5 font-sans text-[9px] text-maroon/40">In-person visit</p>
+                  </div>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setBookingType('virtual')}
+                  className={`flex items-center gap-3 rounded-2xl border p-4 text-left transition-all duration-300 ${
+                    bookingType === 'virtual'
+                      ? 'border-gold bg-maroon text-gold-light shadow-[0_0_20px_rgba(200,157,71,0.15)]'
+                      : 'border-[#C89D47]/20 bg-white/60 text-maroon hover:border-gold/40'
+                  }`}
+                >
+                  <Video size={18} />
+                  <div>
+                    <p className="font-sans text-[11px] font-medium uppercase tracking-[0.1em]">Virtual Viewing</p>
+                    <p className="mt-0.5 font-sans text-[9px] text-maroon/40">Video call</p>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            {/* Form Fields */}
+            <div className="space-y-4">
+              <label className="block">
+                <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-maroon">Full Name *</span>
+                <input
+                  required
+                  type="text"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  placeholder="Your full name"
+                  className="mt-2 h-12 w-full rounded-xl border border-[#E5DDD0] bg-white/70 px-4 text-sm normal-case text-maroon placeholder:text-maroon/30 focus:border-gold focus:ring-2 focus:ring-gold/10 outline-none transition-all"
+                />
+              </label>
+
+              <label className="block">
+                <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-maroon">WhatsApp Number *</span>
+                <input
+                  required
+                  type="tel"
+                  value={form.whatsapp}
+                  onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
+                  placeholder="+91 98XXX XXXXX"
+                  className="mt-2 h-12 w-full rounded-xl border border-[#E5DDD0] bg-white/70 px-4 text-sm normal-case text-maroon placeholder:text-maroon/30 focus:border-gold focus:ring-2 focus:ring-gold/10 outline-none transition-all"
+                />
+              </label>
+
+              <label className="block">
+                <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-maroon">Preferred Date *</span>
+                <input
+                  required
+                  type="date"
+                  value={form.date}
+                  onChange={(e) => setForm({ ...form, date: e.target.value })}
+                  className="mt-2 h-12 w-full rounded-xl border border-[#E5DDD0] bg-white/70 px-4 text-sm normal-case text-maroon placeholder:text-maroon/30 focus:border-gold focus:ring-2 focus:ring-gold/10 outline-none transition-all"
+                />
+              </label>
+
+              <label className="block">
+                <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-maroon">Category of Interest</span>
+                <select
+                  value={form.category}
+                  onChange={(e) => setForm({ ...form, category: e.target.value })}
+                  className="mt-2 h-12 w-full rounded-xl border border-[#E5DDD0] bg-white/70 px-4 text-sm normal-case text-maroon focus:border-gold focus:ring-2 focus:ring-gold/10 outline-none transition-all"
+                >
+                  <option value="">Select a category</option>
+                  {categories.map((cat) => (
+                    <option key={cat} value={cat}>{cat}</option>
+                  ))}
+                </select>
+              </label>
+            </div>
+
+            <button
+              type="submit"
+              className="mt-6 flex h-12 w-full items-center justify-center rounded-full bg-maroon border border-gold/40 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold-light transition-all duration-300 hover:bg-maroon-dark hover:shadow-[0_0_25px_rgba(200,157,71,0.45)] active:scale-[0.98]"
+            >
+              {bookingType === 'atelier' ? 'Confirm Atelier Visit' : 'Schedule Virtual Viewing'}
+            </button>
+
+            <p className="mt-4 text-center font-sans text-[10px] text-maroon/30">
+              {bookingType === 'atelier'
+                ? 'Johari Bazar / MI Road, Jaipur, Rajasthan 302001'
+                : 'We offer live video inspections for outstation & NRI clients'}
+            </p>
+          </form>
+        )}
+      </div>
+    </div>
+  )
+}
+</file>
+
+<file path="components/cart-context.tsx">
+'use client'
+
+import { createContext, useCallback, useContext, useMemo, useState } from 'react'
+import type { Product } from '@/lib/products'
+
+type CartLine = { product: Product; quantity: number }
+type CartContextValue = {
+  lines: CartLine[]
+  count: number
+  subtotal: number
+  drawerOpen: boolean
+  openCart: () => void
+  closeCart: () => void
+  add: (product: Product, quantity?: number) => void
+  update: (id: string, quantity: number) => void
+  remove: (id: string) => void
+}
+const CartContext = createContext<CartContextValue | null>(null)
+
+export function CartProvider({ children }: { children: React.ReactNode }) {
+  const [lines, setLines] = useState<CartLine[]>([])
+  const [drawerOpen, setDrawerOpen] = useState(false)
+
+  const openCart = useCallback(() => setDrawerOpen(true), [])
+  const closeCart = useCallback(() => setDrawerOpen(false), [])
+
+  const add = useCallback((product: Product, quantity = 1) => {
+    setLines((current) => {
+      const existing = current.find((line) => line.product.id === product.id)
+      if (existing) {
+        return current.map((line) =>
+          line.product.id === product.id ? { ...line, quantity: line.quantity + quantity } : line
+        )
+      }
+      return [...current, { product, quantity }]
+    })
+    setDrawerOpen(true)
+  }, [])
+
+  const update = useCallback((id: string, quantity: number) => {
+    setLines((current) =>
+      quantity < 1
+        ? current.filter((line) => line.product.id !== id)
+        : current.map((line) => (line.product.id === id ? { ...line, quantity } : line))
+    )
+  }, [])
+
+  const remove = useCallback((id: string) => {
+    setLines((current) => current.filter((line) => line.product.id !== id))
+  }, [])
+
+  const value = useMemo(
+    () => ({
+      lines,
+      count: lines.reduce((sum, line) => sum + line.quantity, 0),
+      subtotal: lines.reduce((sum, line) => sum + line.product.price * line.quantity, 0),
+      drawerOpen,
+      openCart,
+      closeCart,
+      add,
+      update,
+      remove,
+    }),
+    [lines, drawerOpen, openCart, closeCart, add, update, remove]
+  )
+
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>
+}
+
+export function useCart() {
+  const context = useContext(CartContext)
+  if (!context) throw new Error('useCart must be used inside CartProvider')
+  return context
+}
+</file>
+
+<file path="components/cart-drawer.tsx">
+'use client'
+
+import Link from 'next/link'
+import { Minus, Plus, ShoppingBag, Trash2, X, Truck, ShieldCheck } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { useCart } from '@/components/cart-context'
+import { formatPrice } from '@/lib/products'
+
+const FREE_SHIPPING_THRESHOLD = 5000
+const TAX_RATE = 0.088
+const GIFT_WRAP = 25
+
+export function CartDrawer() {
+  const { lines, count, subtotal, drawerOpen, closeCart, update, remove } = useCart()
+  const [closing, setClosing] = useState(false)
+  const [mounted, setMounted] = useState(false)
+  const overlayRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => { setMounted(true) }, [])
+
+  useEffect(() => {
+    if (drawerOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [drawerOpen])
+
+  const handleClose = () => {
+    setClosing(true)
+    setTimeout(() => { closeCart(); setClosing(false) }, 300)
+  }
+
+  const shippingProgress = Math.min((subtotal / FREE_SHIPPING_THRESHOLD) * 100, 100)
+  const remainingForFreeShipping = Math.max(FREE_SHIPPING_THRESHOLD - subtotal, 0)
+  const estimatedTax = subtotal * TAX_RATE
+  const total = subtotal + estimatedTax + GIFT_WRAP
+
+  if (!mounted) return null
+
+  return (
+    <div
+      ref={overlayRef}
+      className={`fixed inset-0 z-[100] ${
+        drawerOpen && !closing ? 'pointer-events-auto' : 'pointer-events-none'
+      }`}
+    >
+      {/* Backdrop */}
+      <div
+        onClick={handleClose}
+        className={`absolute inset-0 bg-maroon/10 backdrop-blur-sm transition-opacity duration-300 ${
+          drawerOpen && !closing ? 'opacity-100' : 'opacity-0'
+        }`}
+      />
+
+      {/* Drawer */}
+      <div
+        className={`absolute right-0 top-0 h-full w-full max-w-[440px] bg-[#FAF6EE]/95 backdrop-blur-2xl border-l border-[#C89D47]/20 shadow-2xl shadow-maroon/10 flex flex-col ${
+          drawerOpen && !closing ? 'animate-slide-in' : 'animate-slide-out'
+        }`}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between border-b border-[#C89D47]/10 px-6 py-5">
+          <div className="flex items-center gap-3">
+            <ShoppingBag size={18} className="text-maroon" strokeWidth={1.5} />
+            <h2 className="font-serif text-lg text-maroon">Your Bag</h2>
+            <span className="flex h-5 min-w-[20px] items-center justify-center rounded-full bg-maroon px-1.5 font-sans text-[10px] font-medium text-gold-light">
+              {count}
+            </span>
+          </div>
+          <button
+            onClick={handleClose}
+            aria-label="Close cart"
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-maroon/10 text-maroon/40 transition-colors hover:border-maroon/20 hover:text-maroon"
+          >
+            <X size={14} />
+          </button>
+        </div>
+
+        {/* Free Shipping Progress */}
+        <div className="px-6 py-4 border-b border-[#C89D47]/10">
+          {subtotal >= FREE_SHIPPING_THRESHOLD ? (
+            <div className="flex items-center gap-2 text-emerald-heritage">
+              <Truck size={14} />
+              <span className="font-sans text-xs">Complimentary insured shipping unlocked!</span>
+            </div>
+          ) : (
+            <>
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-sans text-xs text-maroon/50">
+                  {formatPrice(remainingForFreeShipping)} away from free shipping
+                </span>
+                <Truck size={14} className="text-maroon/30" />
+              </div>
+              <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#E5DDD0]">
+                <div
+                  className="shipping-progress h-full rounded-full transition-all duration-700 ease-out"
+                  style={{ width: `${shippingProgress}%` }}
+                />
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* Line Items */}
+        <div className="flex-1 overflow-y-auto px-6 py-4">
+          {lines.length === 0 ? (
+            <div className="flex flex-col items-center justify-center h-full text-center">
+              <ShoppingBag size={48} className="text-[#E5DDD0] mb-4" strokeWidth={1} />
+              <p className="font-serif text-lg text-maroon">Your bag is empty</p>
+              <p className="mt-2 font-sans text-sm text-maroon/40">Discover our heritage collection</p>
+              <Link
+                href="/products"
+                onClick={handleClose}
+                className="mt-6 rounded-full border border-maroon px-6 py-2.5 font-sans text-[10px] uppercase tracking-[0.2em] text-maroon transition-colors hover:bg-maroon hover:text-gold-light"
+              >
+                Browse Heritage
+              </Link>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {lines.map((line) => (
+                <div
+                  key={line.product.id}
+                  className="group relative rounded-2xl bg-white/60 border border-[#C89D47]/15 p-4 transition-all duration-300 hover:border-[#C89D47]/30"
+                >
+                  <div className="flex gap-4">
+                    <Link
+                      href={`/products/${line.product.id}`}
+                      onClick={handleClose}
+                      className="shrink-0 overflow-hidden rounded-xl"
+                    >
+                      <img
+                        src={line.product.image}
+                        alt={line.product.name}
+                        style={{ objectPosition: line.product.position }}
+                        className="h-20 w-20 object-cover"
+                      />
+                    </Link>
+
+                    <div className="flex flex-1 flex-col justify-between min-w-0">
+                      <div className="flex items-start justify-between gap-2">
+                        <Link
+                          href={`/products/${line.product.id}`}
+                          onClick={handleClose}
+                          className="font-serif text-sm font-medium leading-snug text-maroon truncate transition-colors hover:text-gold-dark"
+                        >
+                          {line.product.name}
+                        </Link>
+                        <button
+                          onClick={() => remove(line.product.id)}
+                          aria-label={`Remove ${line.product.name}`}
+                          className="shrink-0 text-maroon/20 transition-colors hover:text-[#B33A3A]"
+                        >
+                          <Trash2 size={13} />
+                        </button>
+                      </div>
+
+                      <p className="font-sans text-[10px] uppercase tracking-[0.15em] text-gold-dark">
+                        22KT Gold
+                      </p>
+
+                      <div className="flex items-center justify-between mt-2">
+                        <div className="flex items-center rounded-full border border-[#E5DDD0]">
+                          <button
+                            onClick={() => update(line.product.id, line.quantity - 1)}
+                            className="px-2.5 py-1 text-maroon/40 transition-colors hover:text-maroon"
+                            aria-label="Decrease quantity"
+                          >
+                            <Minus size={11} />
+                          </button>
+                          <span className="min-w-[24px] text-center font-sans text-xs text-maroon">
+                            {line.quantity}
+                          </span>
+                          <button
+                            onClick={() => update(line.product.id, line.quantity + 1)}
+                            className="px-2.5 py-1 text-maroon/40 transition-colors hover:text-maroon"
+                            aria-label="Increase quantity"
+                          >
+                            <Plus size={11} />
+                          </button>
+                        </div>
+                        <span className="font-sans text-sm font-medium text-maroon">
+                          {formatPrice(line.product.price * line.quantity)}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Sticky Bottom Summary */}
+        {lines.length > 0 && (
+          <div className="border-t border-[#C89D47]/10 bg-white/60 backdrop-blur-xl px-6 py-5">
+            <div className="space-y-2 font-sans text-sm">
+              <div className="flex justify-between text-maroon/50">
+                <span>Subtotal</span>
+                <span>{formatPrice(subtotal)}</span>
+              </div>
+              <div className="flex justify-between text-maroon/50">
+                <span>Estimated Tax</span>
+                <span>{formatPrice(Math.round(estimatedTax))}</span>
+              </div>
+              <div className="flex justify-between text-maroon/50">
+                <span>Gift Wrapping</span>
+                <span>${GIFT_WRAP}</span>
+              </div>
+              <div className="flex justify-between text-maroon/50">
+                <span>Shipping</span>
+                <span className={subtotal >= FREE_SHIPPING_THRESHOLD ? 'text-emerald-heritage font-medium' : ''}>
+                  {subtotal >= FREE_SHIPPING_THRESHOLD ? 'Complimentary' : 'Calculated at checkout'}
+                </span>
+              </div>
+              <div className="my-2 border-t border-[#E5DDD0] pt-3">
+                <div className="flex justify-between font-sans text-base">
+                  <span className="font-medium text-maroon">Total</span>
+                  <span className="font-serif text-xl text-maroon">{formatPrice(Math.round(total))}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-4 flex items-center gap-2 text-maroon/30">
+              <ShieldCheck size={12} />
+              <span className="font-sans text-[10px]">BIS Hallmarked &amp; IGI Certified</span>
+            </div>
+
+            <Link
+              href="/checkout"
+              onClick={handleClose}
+              className="mt-4 flex h-12 w-full items-center justify-center rounded-full bg-maroon border border-gold/40 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold-light transition-all duration-300 hover:bg-maroon-dark hover:shadow-[0_0_20px_rgba(200,157,71,0.25)]"
+            >
+              Proceed to Checkout
+            </Link>
+
+            <button
+              onClick={handleClose}
+              className="mt-3 w-full text-center font-sans text-xs text-maroon/40 transition-colors hover:text-gold-dark"
+            >
+              Continue Shopping
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+</file>
+
+<file path="components/collection-cards.tsx">
+'use client'
+
+import Link from 'next/link'
+import { collections } from '@/lib/products'
+import { ArrowRight } from 'lucide-react'
+
+export function CollectionCards() {
+  return (
+    <section className="mx-auto max-w-[1280px] px-6 py-16 md:px-20">
+      <div className="flex items-end justify-between mb-8">
+        <div>
+          <div className="flex items-center gap-3">
+            <div className="h-px w-8 bg-gold/40" />
+            <p className="font-sans text-[9px] uppercase tracking-[0.3em] text-gold-dark">Curated Heritage</p>
+          </div>
+          <h2 className="mt-3 font-serif text-3xl text-maroon md:text-4xl">Shop by Collection</h2>
+        </div>
+        <Link href="/products" className="hidden md:inline-flex items-center gap-2 font-sans text-[10px] uppercase tracking-[0.2em] text-gold-dark transition-colors hover:text-maroon">
+          View All <ArrowRight size={14} />
+        </Link>
+      </div>
+
+      <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide -mx-6 px-6 md:mx-0 md:px-0 md:grid md:grid-cols-5 md:overflow-visible">
+        {collections.map((item) => (
+          <Link
+            key={item.name}
+            href={`/products?category=${item.name.split(' ')[0]}`}
+            className="group relative flex-shrink-0 w-[200px] md:w-auto aspect-[0.72] overflow-hidden rounded-2xl"
+          >
+            <img
+              src={item.image}
+              alt={item.name}
+              style={{ objectPosition: item.position }}
+              className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-maroon/70 via-maroon/20 to-transparent" />
+            <div className="absolute inset-0 flex flex-col items-center justify-end p-4">
+              <span className="font-serif text-base text-gold-light text-center">{item.name}</span>
+              <span className="mt-1 font-sans text-[9px] uppercase tracking-[0.15em] text-gold-light/50">{item.count} Pieces</span>
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      <Link href="/products" className="mt-6 md:hidden inline-flex items-center gap-2 font-sans text-[10px] uppercase tracking-[0.2em] text-gold-dark transition-colors hover:text-maroon">
+        View All Collections <ArrowRight size={14} />
+      </Link>
+    </section>
+  )
+}
+</file>
+
+<file path="components/hero-slideshow.tsx">
+'use client'
+
+import { useState, useEffect, useCallback } from 'react'
+import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react'
+import Link from 'next/link'
+
+const slides = [
+  {
+    image: '/hero-jewelry.png',
+    title: 'Jadau & Polki Heritage',
+    subtitle: 'Uncut diamonds from the courts of Rajputana',
+    cta: 'Explore Collection',
+    href: '/products?category=Chokers',
+    position: '58% 45%',
+  },
+  {
+    image: '/jewelry-products.png',
+    title: 'Meenakari Artistry',
+    subtitle: 'Hand-enameled masterpieces of Jaipur',
+    cta: 'View Designs',
+    href: '/products?category=Bangles',
+    position: '52% 18%',
+  },
+  {
+    image: '/atelier.png',
+    title: 'The Sacred Atelier',
+    subtitle: 'Three generations of master karigars',
+    cta: 'Our Legacy',
+    href: '/about',
+    position: '60% 40%',
+  },
+  {
+    image: '/hero-jewelry.png',
+    title: 'Bridal Trousseau',
+    subtitle: 'Complete parures for the royal bride',
+    cta: 'Shop Bridal',
+    href: '/products?category=Sets',
+    position: '50% 30%',
+  },
+]
+
+export function HeroSlideshow() {
+  const [current, setCurrent] = useState(0)
+  const [playing, setPlaying] = useState(true)
+
+  const next = useCallback(() => setCurrent((prev) => (prev + 1) % slides.length), [])
+  const prev = useCallback(() => setCurrent((prev) => (prev - 1 + slides.length) % slides.length), [])
+
+  useEffect(() => {
+    if (!playing) return
+    const timer = setInterval(next, 5000)
+    return () => clearInterval(timer)
+  }, [playing, next])
+
+  const slide = slides[current]
+
+  return (
+    <section className="relative h-[500px] md:h-[650px] overflow-hidden bg-maroon">
+      {slides.map((s, i) => (
+        <div
+          key={i}
+          className={`absolute inset-0 transition-opacity duration-1000 ${i === current ? 'opacity-100' : 'opacity-0'}`}
+        >
+          <img
+            src={s.image}
+            alt={s.title}
+            style={{ objectPosition: s.position }}
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-maroon/80 via-maroon/40 to-transparent" />
+        </div>
+      ))}
+
+      {/* Content */}
+      <div className="relative z-10 mx-auto flex h-full max-w-[1280px] items-center px-6 md:px-20">
+        <div className="max-w-[500px]">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="h-px w-12 bg-gold" />
+            <span className="font-sans text-[9px] uppercase tracking-[0.3em] text-gold-light/70">Shreeram Jewellers</span>
+          </div>
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-gold-light leading-tight">{slide.title}</h2>
+          <p className="mt-4 font-sans text-sm text-gold-light/60 leading-relaxed">{slide.subtitle}</p>
+          <Link
+            href={slide.href}
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-gold/20 border border-gold/40 px-8 py-3.5 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold-light transition-all duration-300 hover:bg-gold/30 hover:shadow-[0_0_25px_rgba(200,157,71,0.3)] active:scale-95 backdrop-blur-sm"
+          >
+            {slide.cta}
+          </Link>
+        </div>
+      </div>
+
+      {/* Navigation Arrows */}
+      <button
+        onClick={prev}
+        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-gold-light transition-all hover:bg-white/20"
+        aria-label="Previous slide"
+      >
+        <ChevronLeft size={18} />
+      </button>
+      <button
+        onClick={next}
+        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-gold-light transition-all hover:bg-white/20"
+        aria-label="Next slide"
+      >
+        <ChevronRight size={18} />
+      </button>
+
+      {/* Bottom Controls */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex items-center gap-4">
+        <button
+          onClick={() => setPlaying(!playing)}
+          className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-gold-light transition-all hover:bg-white/20"
+          aria-label={playing ? 'Pause slideshow' : 'Play slideshow'}
+        >
+          {playing ? <Pause size={12} /> : <Play size={12} />}
+        </button>
+        <div className="flex items-center gap-2">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                i === current ? 'w-8 bg-gold' : 'w-2 bg-gold/30 hover:bg-gold/50'
+              }`}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="components/metal-ticker.tsx">
+'use client'
+
+import { useEffect, useState } from 'react'
+
+const tickerItems = [
+  { label: "24KT GOLD", value: "₹15,480/g", change: "+0.3%", up: true },
+  { label: "22KT GOLD", value: "₹14,190/g", change: "+0.3%", up: true },
+  { label: "18KT GOLD", value: "₹11,610/g", change: "+0.2%", up: true },
+  { label: "SILVER", value: "₹1,85,000/kg", change: "+0.1%", up: true },
+  { label: "PLATINUM", value: "₹3,420/g", change: "+0.1%", up: true },
+]
+
+export function MetalTicker() {
+  const [visible, setVisible] = useState(true)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setVisible(window.scrollY < 50)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  return (
+    <div
+      className={`fixed top-0 left-0 right-0 z-[60] bg-[#3A0A10] text-[#E8D39E] text-[11px] tracking-widest py-1.5 px-4 flex justify-between items-center border-b border-[#C89D47]/20 transition-all duration-500 ${
+        visible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+      }`}
+    >
+      <div className="hidden md:flex items-center gap-2">
+        <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" />
+        <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+      </div>
+
+      <div className="flex-1 overflow-hidden">
+        <div className="flex items-center justify-center gap-6 md:gap-10">
+          {tickerItems.map((item) => (
+            <span key={item.label} className="hidden sm:inline-flex items-center gap-2 whitespace-nowrap">
+              <span className="text-[#E8D39E]/60">{item.label}:</span>
+              <span className="font-medium text-[#E8D39E]">{item.value}</span>
+              {item.change && (
+                <span className={`text-[10px] ${item.up ? 'text-emerald-400' : 'text-rose-400'}`}>
+                  {item.change}
+                </span>
+              )}
+            </span>
+          ))}
+          <span className="sm:hidden text-[#E8D39E]/80">24KT: ₹15,480/g</span>
+        </div>
+      </div>
+
+      <div className="hidden lg:flex items-center gap-2">
+        <span className="text-[#E8D39E]/50">COMPLIMENTARY INSURED PAN-INDIA DELIVERY</span>
+      </div>
+    </div>
+  )
+}
+</file>
+
+<file path="components/mobile-bottom-nav.tsx">
+'use client'
+
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { Home, Grid3X3, Heart, ShoppingBag, User } from 'lucide-react'
+import { useCart } from '@/components/cart-context'
+import { useWishlist } from '@/components/wishlist-context'
+
+const navItems = [
+  { icon: Home, label: 'Home', href: '/' },
+  { icon: Grid3X3, label: 'Categories', href: '/products' },
+  { icon: Heart, label: 'Wishlist', href: '/wishlist' },
+  { icon: ShoppingBag, label: 'Cart', href: '/cart' },
+]
+
+export function MobileBottomNav() {
+  const pathname = usePathname()
+  const { count } = useCart()
+  const { count: wishlistCount } = useWishlist()
+
+  return (
+    <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-[#FAF6EE]/95 backdrop-blur-xl border-t border-[#C89D47]/15 safe-area-pb">
+      <div className="flex items-center justify-around px-2 py-2">
+        {navItems.map((item) => {
+          const isActive = pathname === item.href
+          const Icon = item.icon
+          const badge = item.label === 'Cart' ? count : item.label === 'Wishlist' ? wishlistCount : 0
+
+          if (item.href === '/cart') {
+            return (
+              <button
+                key={item.label}
+                onClick={() => document.querySelector('[data-cart-open]')?.click()}
+                className="relative flex flex-col items-center gap-1 px-3 py-1.5"
+              >
+                <div className="relative">
+                  <Icon size={20} strokeWidth={1.5} className={isActive ? 'text-gold-dark' : 'text-maroon/50'} />
+                  {badge > 0 && (
+                    <span className="absolute -top-1.5 -right-2 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-maroon px-1 font-sans text-[8px] font-medium text-gold-light">
+                      {badge}
+                    </span>
+                  )}
+                </div>
+                <span className={`font-sans text-[8px] uppercase tracking-wider ${isActive ? 'text-gold-dark' : 'text-maroon/40'}`}>{item.label}</span>
+              </button>
+            )
+          }
+
+          return (
+            <Link
+              key={item.label}
+              href={item.href}
+              className="relative flex flex-col items-center gap-1 px-3 py-1.5"
+            >
+              <div className="relative">
+                <Icon size={20} strokeWidth={1.5} className={isActive ? 'text-gold-dark' : 'text-maroon/50'} />
+                {badge > 0 && (
+                  <span className="absolute -top-1.5 -right-2 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-maroon px-1 font-sans text-[8px] font-medium text-gold-light">
+                    {badge}
+                  </span>
+                )}
+              </div>
+              <span className={`font-sans text-[8px] uppercase tracking-wider ${isActive ? 'text-gold-dark' : 'text-maroon/40'}`}>{item.label}</span>
+            </Link>
+          )
+        })}
+      </div>
+    </nav>
+  )
+}
+</file>
+
+<file path="components/pincode-checker.tsx">
+'use client'
+
+import { useState } from 'react'
+import { MapPin, Truck, CheckCircle } from 'lucide-react'
+
+export function PincodeChecker() {
+  const [pincode, setPincode] = useState('')
+  const [status, setStatus] = useState<'idle' | 'checking' | 'available' | 'unavailable'>('idle')
+
+  const check = () => {
+    if (pincode.length !== 6) return
+    setStatus('checking')
+    // Simulate API call
+    setTimeout(() => {
+      // First 3 digits determine metro/non-metro for demo
+      const firstDigit = parseInt(pincode[0])
+      setStatus(firstDigit >= 1 && firstDigit <= 7 ? 'available' : 'unavailable')
+    }, 1000)
+  }
+
+  return (
+    <div className="rounded-xl border border-[#C89D47]/15 bg-white/60 p-4">
+      <div className="flex items-center gap-2 mb-3">
+        <MapPin size={14} className="text-maroon/40" />
+        <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-maroon/50">Check Delivery</span>
+      </div>
+      <div className="flex gap-2">
+        <input
+          type="tel"
+          value={pincode}
+          onChange={(e) => {
+            const val = e.target.value.replace(/\D/g, '').slice(0, 6)
+            setPincode(val)
+            setStatus('idle')
+          }}
+          placeholder="Enter Pincode"
+          className="flex-1 h-10 rounded-lg border border-[#E5DDD0] bg-white/70 px-3 font-sans text-sm text-maroon outline-none focus:border-gold focus:ring-1 focus:ring-gold/10 transition-all"
+        />
+        <button
+          onClick={check}
+          disabled={pincode.length !== 6 || status === 'checking'}
+          className="h-10 rounded-lg bg-maroon px-4 font-sans text-[10px] uppercase tracking-wider text-gold-light transition-all hover:bg-maroon-dark disabled:opacity-50"
+        >
+          {status === 'checking' ? '...' : 'Check'}
+        </button>
+      </div>
+      {status === 'available' && (
+        <div className="mt-3 flex items-center gap-2 text-emerald-heritage">
+          <CheckCircle size={14} />
+          <span className="font-sans text-xs">Delivered in 5-7 business days. Free shipping.</span>
+        </div>
+      )}
+      {status === 'unavailable' && (
+        <div className="mt-3 flex items-center gap-2 text-maroon/50">
+          <Truck size={14} />
+          <span className="font-sans text-xs">Delivery available in 10-12 business days.</span>
+        </div>
+      )}
+    </div>
+  )
+}
+</file>
+
+<file path="components/reviews-section.tsx">
+'use client'
+
+import { Star, CheckCircle } from 'lucide-react'
+import type { Review } from '@/lib/products'
+
+function StarRating({ rating, size = 14 }: { rating: number; size?: number }) {
+  return (
+    <div className="flex items-center gap-0.5">
+      {[1, 2, 3, 4, 5].map((star) => (
+        <Star
+          key={star}
+          size={size}
+          className={star <= rating ? 'fill-gold text-gold' : 'fill-none text-maroon/20'}
+        />
+      ))}
+    </div>
+  )
+}
+
+export function ReviewsSection({ reviews, rating, reviewCount }: { reviews: Review[]; rating: number; reviewCount: number }) {
+  const ratingDistribution = [5, 4, 3, 2, 1].map((stars) => ({
+    stars,
+    count: reviews.filter((r) => r.rating === stars).length,
+    percentage: reviews.length > 0 ? (reviews.filter((r) => r.rating === stars).length / reviews.length) * 100 : 0,
+  }))
+
+  return (
+    <section className="mt-12 border-t border-[#C89D47]/10 pt-8">
+      <div className="flex items-center justify-between mb-6">
+        <h3 className="font-serif text-2xl text-maroon">Customer Reviews</h3>
+        <div className="flex items-center gap-2">
+          <StarRating rating={Math.round(rating)} size={16} />
+          <span className="font-sans text-sm text-maroon/60">{rating} ({reviewCount} reviews)</span>
+        </div>
+      </div>
+
+      {/* Rating Distribution */}
+      <div className="mb-8 rounded-xl bg-white/60 border border-[#C89D47]/15 p-4">
+        {ratingDistribution.map(({ stars, count, percentage }) => (
+          <div key={stars} className="flex items-center gap-3 py-1">
+            <span className="font-sans text-xs text-maroon/50 w-8">{stars} ★</span>
+            <div className="flex-1 h-2 rounded-full bg-maroon/5 overflow-hidden">
+              <div className="h-full rounded-full bg-gold transition-all duration-500" style={{ width: `${percentage}%` }} />
+            </div>
+            <span className="font-sans text-xs text-maroon/40 w-8 text-right">{count}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Reviews List */}
+      <div className="space-y-4">
+        {reviews.map((review) => (
+          <div key={review.id} className="rounded-xl bg-white/60 border border-[#C89D47]/15 p-5">
+            <div className="flex items-start justify-between">
+              <div>
+                <div className="flex items-center gap-2">
+                  <StarRating rating={review.rating} size={12} />
+                  {review.verified && (
+                    <span className="flex items-center gap-1 font-sans text-[9px] uppercase tracking-wider text-emerald-heritage">
+                      <CheckCircle size={10} /> Verified
+                    </span>
+                  )}
+                </div>
+                <h4 className="mt-2 font-serif text-base text-maroon">{review.title}</h4>
+              </div>
+              <span className="font-sans text-[10px] text-maroon/30">{new Date(review.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+            </div>
+            <p className="mt-2 font-sans text-sm text-maroon/50 leading-relaxed">{review.body}</p>
+            <p className="mt-3 font-sans text-[10px] text-maroon/30">— {review.author}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="components/search-modal.tsx">
+'use client'
+
+import { useState, useEffect, useRef } from 'react'
+import { Search, X, ArrowRight, Clock, TrendingUp } from 'lucide-react'
+import { searchProducts, formatPrice } from '@/lib/products'
+import Link from 'next/link'
+
+const trendingSearches = ['Jadau Choker', 'Polki Earrings', 'Bridal Set', 'Meenakari Bangles', 'Temple Necklace']
+
+export function SearchModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const [query, setQuery] = useState('')
+  const [results, setResults] = useState<ReturnType<typeof searchProducts>>([])
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (open) {
+      setQuery('')
+      setResults([])
+      setTimeout(() => inputRef.current?.focus(), 100)
+    }
+  }, [open])
+
+  useEffect(() => {
+    if (query.length > 1) {
+      setResults(searchProducts(query))
+    } else {
+      setResults([])
+    }
+  }, [query])
+
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    if (open) {
+      document.addEventListener('keydown', handleEsc)
+      document.body.style.overflow = 'hidden'
+    }
+    return () => {
+      document.removeEventListener('keydown', handleEsc)
+      document.body.style.overflow = ''
+    }
+  }, [open, onClose])
+
+  if (!open) return null
+
+  return (
+    <div className="fixed inset-0 z-[120] flex items-start justify-center pt-20 px-4">
+      <div className="absolute inset-0 bg-maroon/20 backdrop-blur-sm" onClick={onClose} />
+      <div className="relative w-full max-w-[600px] rounded-2xl bg-[#FAF6EE]/98 backdrop-blur-2xl border border-[#C89D47]/25 shadow-2xl shadow-maroon/10 overflow-hidden animate-fade-in">
+        {/* Search Input */}
+        <div className="flex items-center gap-3 border-b border-[#C89D47]/10 px-5 py-4">
+          <Search size={18} className="text-maroon/40" />
+          <input
+            ref={inputRef}
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search heritage collections..."
+            className="flex-1 bg-transparent font-sans text-sm text-maroon outline-none placeholder:text-maroon/30"
+          />
+          {query && (
+            <button onClick={() => setQuery('')} className="text-maroon/40 hover:text-maroon">
+              <X size={16} />
+            </button>
+          )}
+          <button onClick={onClose} className="rounded-full border border-maroon/10 px-3 py-1 font-sans text-[9px] uppercase tracking-wider text-maroon/40 hover:border-maroon/20 hover:text-maroon">
+            ESC
+          </button>
+        </div>
+
+        {/* Results */}
+        <div className="max-h-[400px] overflow-y-auto">
+          {query.length > 1 && results.length > 0 ? (
+            <div className="p-4">
+              <p className="font-sans text-[9px] uppercase tracking-[0.2em] text-maroon/40 mb-3">{results.length} Results</p>
+              <div className="space-y-2">
+                {results.map((product) => (
+                  <Link
+                    key={product.id}
+                    href={`/products/${product.id}`}
+                    onClick={onClose}
+                    className="flex items-center gap-4 rounded-xl p-3 transition-colors hover:bg-white/60"
+                  >
+                    <img src={product.image} alt={product.name} className="h-14 w-14 rounded-lg object-cover" />
+                    <div className="flex-1 min-w-0">
+                      <p className="font-sans text-[9px] uppercase tracking-[0.15em] text-maroon/40">{product.code}</p>
+                      <p className="font-serif text-sm text-maroon truncate">{product.name}</p>
+                      <p className="font-sans text-xs text-gold-dark">{formatPrice(product.price)}</p>
+                    </div>
+                    <ArrowRight size={14} className="text-maroon/30" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ) : query.length > 1 ? (
+            <div className="p-8 text-center">
+              <p className="font-serif text-lg text-maroon">No pieces found</p>
+              <p className="mt-1 font-sans text-xs text-maroon/40">Try searching for a different collection</p>
+            </div>
+          ) : (
+            <div className="p-5">
+              <p className="flex items-center gap-2 font-sans text-[9px] uppercase tracking-[0.2em] text-maroon/40 mb-3">
+                <TrendingUp size={12} /> Trending
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {trendingSearches.map((term) => (
+                  <button
+                    key={term}
+                    onClick={() => setQuery(term)}
+                    className="rounded-full border border-[#C89D47]/20 bg-white/60 px-4 py-2 font-sans text-[10px] uppercase tracking-[0.1em] text-maroon/60 transition-all hover:border-gold/40 hover:text-maroon"
+                  >
+                    {term}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+</file>
+
+<file path="components/wishlist-context.tsx">
+'use client'
+
+import { createContext, useContext, useState, useEffect, useCallback } from 'react'
+import type { Product } from '@/lib/products'
+
+type WishlistContextType = {
+  items: Product[]
+  add: (product: Product) => void
+  remove: (productId: string) => void
+  toggle: (product: Product) => void
+  has: (productId: string) => boolean
+  count: number
+}
+
+const WishlistContext = createContext<WishlistContextType | null>(null)
+
+export function WishlistProvider({ children }: { children: React.ReactNode }) {
+  const [items, setItems] = useState<Product[]>([])
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('shreeram-wishlist')
+      if (saved) setItems(JSON.parse(saved))
+    } catch {}
+  }, [])
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('shreeram-wishlist', JSON.stringify(items))
+    } catch {}
+  }, [items])
+
+  const add = useCallback((product: Product) => {
+    setItems((prev) => {
+      if (prev.some((p) => p.id === product.id)) return prev
+      return [...prev, product]
+    })
+  }, [])
+
+  const remove = useCallback((productId: string) => {
+    setItems((prev) => prev.filter((p) => p.id !== productId))
+  }, [])
+
+  const toggle = useCallback((product: Product) => {
+    setItems((prev) => {
+      if (prev.some((p) => p.id === product.id)) return prev.filter((p) => p.id !== product.id)
+      return [...prev, product]
+    })
+  }, [])
+
+  const has = useCallback((productId: string) => items.some((p) => p.id === productId), [items])
+
+  return (
+    <WishlistContext.Provider value={{ items, add, remove, toggle, has, count: items.length }}>
+      {children}
+    </WishlistContext.Provider>
+  )
+}
+
+export function useWishlist() {
+  const ctx = useContext(WishlistContext)
+  if (!ctx) throw new Error('useWishlist must be used within WishlistProvider')
+  return ctx
+}
+</file>
+
+<file path="lib/utils.ts">
+import { clsx, type ClassValue } from 'clsx'
+import { twMerge } from 'tailwind-merge'
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+</file>
+
+<file path=".gitignore">
+# v0 sandbox internal files
+__v0_runtime_loader.js
+__v0_devtools.tsx
+__v0_jsx-dev-runtime.ts
+.snowflake/
+.v0-trash/
+.vercel/
+
+# Environment variables
+.env*.local
+
+# Common ignores
+node_modules
+.next/
+.DS_Store
+</file>
+
+<file path="components.json">
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "base-nova",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "app/globals.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
+  },
+  "iconLibrary": "lucide"
+}
+</file>
+
+<file path="next.config.mjs">
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  images: {
+    unoptimized: true,
+  },
+}
+
+export default nextConfig
+</file>
+
+<file path="package.json">
+{
+  "name": "my-project",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.5.0",
+    "@vercel/analytics": "1.6.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.16.0",
+    "next": "16.3.3",
+    "react": "^19",
+    "react-dom": "^19",
+    "shadcn": "^4.11.0",
+    "tailwind-merge": "^3.3.1",
+    "tw-animate-css": "^1.4.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^24",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "postcss": "^8.5",
+    "tailwindcss": "^4.3.3",
+    "typescript": "5.7.3"
+  }
+}
+</file>
+
+<file path="pnpm-workspace.yaml">
+minimumReleaseAgeExclude:
+  - '@next/*'
+  - next
+</file>
+
+<file path="postcss.config.mjs">
+/** @type {import('postcss-load-config').Config} */
+const config = {
+  plugins: {
+    '@tailwindcss/postcss': {},
+  },
+}
+
+export default config
+</file>
+
+<file path="tsconfig.json">
+{
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "target": "ES6",
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": ["node_modules"]
+}
+</file>
+
+<file path="app/globals.css">
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-maroon: #4A0E17;
+  --color-maroon-dark: #380D14;
+  --color-maroon-light: #6B1A28;
+  --color-gold: #C89D47;
+  --color-gold-bright: #D4AF37;
+  --color-gold-light: #E8D39E;
+  --color-emerald-heritage: #123A2C;
+  --color-ivory: #FAF6EE;
+  --color-ivory-deep: #F5F0E5;
+  --color-sandalwood: #FDFBF7;
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+}
+
+:root {
+  color-scheme: light;
+  --background: #FAF6EE;
+  --foreground: #4A0E17;
+  --card: #FFFFFF;
+  --card-foreground: #4A0E17;
+  --popover: #FFFFFF;
+  --popover-foreground: #4A0E17;
+  --primary: #4A0E17;
+  --primary-foreground: #FAF6EE;
+  --secondary: #F5F0E5;
+  --secondary-foreground: #4A0E17;
+  --muted: #F0EBE0;
+  --muted-foreground: #7A6B5D;
+  --border: #E5DDD0;
+  --accent: #C89D47;
+  --accent-foreground: #4A0E17;
+  --destructive: #B33A3A;
+  --destructive-foreground: #FAF6EE;
+  --input: #E5DDD0;
+  --ring: #C89D47;
+}
+
+* { border-color: var(--border); }
+html { background: var(--background); scroll-behavior: smooth; }
+body { margin: 0; background: var(--background); color: var(--foreground); }
+button, a { cursor: pointer; }
+::selection { background: #C89D47; color: #FAF6EE; }
+
+@utility glass-header {
+  background: rgba(250, 246, 238, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200, 157, 71, 0.2);
+  box-shadow: 0 4px 20px rgba(74, 14, 23, 0.03);
+}
+
+@utility glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(200, 157, 71, 0.25);
+  box-shadow: 0 8px 24px rgba(74, 14, 23, 0.04);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@utility glass-card-hover {
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.glass-card-hover:hover {
+  box-shadow: 0 12px 32px rgba(74, 14, 23, 0.08);
+  border-color: rgba(200, 157, 71, 0.4);
+}
+
+@utility product-image-overlay {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.group:hover .product-image-overlay {
+  opacity: 1;
+}
+
+@utility glass-panel {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(200, 157, 71, 0.2);
+  box-shadow: 0 8px 32px rgba(74, 14, 23, 0.03);
+}
+
+@utility glass-dropdown {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(200, 157, 71, 0.15);
+  box-shadow: 0 16px 48px rgba(74, 14, 23, 0.06);
+}
+
+@utility glass-input {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid #E5DDD0;
+  transition: border-color 0.3s ease;
+}
+.glass-input:focus {
+  border-color: #C89D47;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(200, 157, 71, 0.1);
+}
+
+@utility shipping-progress {
+  background: linear-gradient(90deg, #C89D47 0%, #E8D39E 50%, #C89D47 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+@keyframes slide-out-right {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@utility animate-slide-in {
+  animation: slide-in-right 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@utility animate-slide-out {
+  animation: slide-out-right 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@utility animate-fade-in {
+  animation: fade-in 0.25s ease forwards;
+}
+@utility animate-fade-out {
+  animation: fade-out 0.2s ease forwards;
+}
+
+@keyframes gold-shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@utility gold-shimmer-text {
+  background: linear-gradient(90deg, #8C6D2B, #C89D47, #E8D39E, #C89D47, #8C6D2B);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gold-shimmer 4s linear infinite;
+}
+
+@keyframes float-glow {
+  0%, 100% { transform: translateY(0px) scale(1); opacity: 0.6; }
+  50% { transform: translateY(-10px) scale(1.05); opacity: 1; }
+}
+
+@utility animate-float-glow {
+  animation: float-glow 4s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 0.7; }
+  50% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.7; }
+}
+
+@utility animate-pulse-ring {
+  animation: pulse-ring 2s ease-in-out infinite;
+}
+
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@utility animate-ticker {
+  animation: ticker-scroll 30s linear infinite;
+}
+
+.hero-tilt {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.hero-tilt-inner {
+  transition: transform 0.1s ease-out;
+  transform-style: preserve-3d;
+}
+
+.hero-tilt-inner:hover {
+  transform: rotateY(2deg) rotateX(-1deg) scale(1.01);
+}
+
+.hero-jharokha {
+  clip-path: polygon(
+    0% 8%, 5% 4%, 12% 1.5%, 20% 0.3%, 30% 0%, 40% 0.3%, 48% 2%, 50% 3%,
+    52% 2%, 60% 0.3%, 70% 0%, 80% 0.3%, 88% 1.5%, 95% 4%, 100% 8%,
+    100% 100%, 0% 100%
+  );
+}
+
+.hero-jharokha-border {
+  clip-path: polygon(
+    0% 7.5%, 4.8% 3.8%, 11.5% 1.3%, 19.5% 0.1%, 30% 0%, 40% 0.1%, 47.8% 1.8%, 50% 2.8%,
+    52.2% 1.8%, 60% 0.1%, 70% 0%, 80.5% 0.1%, 88.5% 1.3%, 95.2% 3.8%, 100% 7.5%,
+    100% 100%, 0% 100%
+  );
+}
+
+.metal-pill-active {
+  background: #4A0E17;
+  color: #E8D39E;
+  border-color: #C89D47;
+}
+
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.safe-area-pb {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+</file>
+
+<file path="app/layout.tsx">
+import { Analytics } from '@vercel/analytics/next'
+import type { Metadata, Viewport } from 'next'
+import { Inter, Playfair_Display } from 'next/font/google'
+import './globals.css'
+import { CartProvider } from '@/components/cart-context'
+import { WishlistProvider } from '@/components/wishlist-context'
+import { CartDrawer } from '@/components/cart-drawer'
+import { MetalTicker } from '@/components/metal-ticker'
+import { AnnouncementBar } from '@/components/announcement-bar'
+import { SiteHeader } from '@/components/site-header'
+import { SiteFooter } from '@/components/site-footer'
+import { MobileBottomNav } from '@/components/mobile-bottom-nav'
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' })
+
+export const metadata: Metadata = {
+  title: 'Shreeram Jewellers | Jaipur Heritage Fine Jewellery Since 1952',
+  description: 'The Pink City\'s heritage atelier for Jadau, Polki, Kundan & temple gold jewellery. Crafted by master karigars of Rajasthan. BIS Hallmarked 916 Gold.',
+}
+
+export const viewport: Viewport = { colorScheme: 'light', themeColor: '#FAF6EE', userScalable: true }
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html lang="en" className={`${inter.variable} ${playfair.variable} bg-background`}>
+      <body className="font-sans antialiased text-foreground pb-16 md:pb-0">
+        <CartProvider>
+          <WishlistProvider>
+            <AnnouncementBar />
+            <MetalTicker />
+            <SiteHeader />
+            <CartDrawer />
+            {children}
+            <SiteFooter />
+            <MobileBottomNav />
+          </WishlistProvider>
+        </CartProvider>
+        {process.env.NODE_ENV === 'production' && <Analytics />}
+      </body>
+    </html>
+  )
+}
+</file>
+
+<file path="components/concierge-pill.tsx">
+'use client'
+
+import { Calendar, Sparkles } from 'lucide-react'
+import { useState } from 'react'
+import Link from 'next/link'
+
+export function ConciergePill() {
+  const [hovered, setHovered] = useState(false)
+
+  return (
+    <>
+      <div className="fixed bottom-6 right-6 z-50 md:bottom-8 md:right-8">
+        <Link
+          href="/contact"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          className="bg-[#4A0E17]/90 backdrop-blur-xl border border-[#C89D47]/40 text-[#FAF6EE] shadow-2xl rounded-full px-5 py-3 flex items-center gap-3 cursor-pointer hover:scale-105 transition-all duration-300 hover:shadow-[0_0_30px_rgba(200,157,71,0.2)]"
+        >
+          <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-[#C89D47]/20">
+            <Calendar size={16} className="text-[#E8D39E]" />
+            <span className="absolute -top-0.5 -right-0.5 flex h-3 w-3 items-center justify-center">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#C89D47]/40" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#C89D47]" />
+            </span>
+          </div>
+          <div className="hidden sm:block text-left">
+            <p className="font-sans text-[10px] font-medium uppercase tracking-[0.15em] text-[#E8D39E]">Get in Touch</p>
+            <p className="font-sans text-[8px] uppercase tracking-widest text-[#E8D39E]/50">We&apos;ll WhatsApp You</p>
+          </div>
+          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[#C89D47]/15">
+            <Sparkles size={12} className="text-[#C89D47]" />
+          </div>
+        </Link>
+
+        {hovered && (
+          <div className="absolute bottom-full right-0 mb-3 w-64 rounded-2xl bg-[#4A0E17]/95 backdrop-blur-xl border border-[#C89D47]/30 p-4 shadow-2xl animate-fade-in">
+            <p className="font-serif text-sm text-[#E8D39E]">Private Viewing Session</p>
+            <p className="mt-1 font-sans text-[10px] text-[#E8D39E]/60 leading-relaxed">Experience our Jadau, Polki &amp; bridal collection at our Jaipur atelier or via virtual video call.</p>
+            <div className="mt-3 flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              <span className="font-sans text-[9px] uppercase tracking-widest text-emerald-400">Available Today</span>
+            </div>
+          </div>
+        )}
+      </div>
+    </>
+  )
+}
+</file>
+
+<file path="components/site-footer.tsx">
+import Link from 'next/link'
+
+export function SiteFooter() {
+  return (
+    <footer className="bg-maroon px-6 py-16 text-[#FAF6EE] md:px-20">
+      <div className="mx-auto grid max-w-[1280px] gap-12 md:grid-cols-5">
+        {/* Brand Column */}
+        <div className="md:col-span-2">
+          <Link href="/" className="font-serif text-2xl text-gold-light tracking-[0.2em]">SHREERAM</Link>
+          <p className="mt-1 font-sans text-[8px] uppercase tracking-[0.3em] text-[#E8D39E]/70">JAIPUR • RAJASTHAN</p>
+          <p className="mt-6 max-w-[300px] font-sans text-sm leading-6 text-[#FAF6EE]/80">
+            The Pink City&apos;s heritage atelier for Jadau, Polki, Kundan &amp; temple gold jewellery. Crafted by master karigars of Rajasthan since 1952.
+          </p>
+
+          {/* Social Links */}
+          <div className="mt-6 flex items-center gap-3">
+            {[
+              { label: 'Instagram', href: '#' },
+              { label: 'Facebook', href: '#' },
+              { label: 'YouTube', href: '#' },
+              { label: 'WhatsApp', href: 'https://wa.me/9198XXXXXXXX' },
+            ].map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-[#C89D47]/30 text-[#E8D39E]/60 transition-all hover:border-[#C89D47]/60 hover:text-[#E8D39E]"
+                aria-label={social.label}
+              >
+                <span className="font-sans text-[10px]">{social.label[0]}</span>
+              </a>
+            ))}
+          </div>
+
+          {/* Payment Methods */}
+          <div className="mt-6">
+            <p className="font-sans text-[9px] uppercase tracking-[0.15em] text-[#E8D39E]/50 mb-3">We Accept</p>
+            <div className="flex items-center gap-2">
+              {['Visa', 'Mastercard', 'UPI', 'Net Banking', 'COD'].map((method) => (
+                <span key={method} className="rounded border border-[#C89D47]/20 px-2 py-1 font-sans text-[8px] text-[#E8D39E]/50">
+                  {method}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Quick Links */}
+        <div>
+          <p className="font-sans text-[10px] uppercase tracking-[0.2em] font-medium text-[#E8D39E]">Quick Links</p>
+          <div className="mt-6 space-y-3">
+            {[
+              { label: 'All Collections', href: '/products' },
+              { label: 'Bridal Trousseau', href: '/products?category=Sets' },
+              { label: 'About Our Legacy', href: '/about' },
+              { label: 'Care Guide', href: '/care' },
+              { label: 'Contact Us', href: '/contact' },
+            ].map((item) => (
+              <Link key={item.label} href={item.href} className="block font-sans text-sm text-[#FAF6EE]/80 transition-colors hover:text-[#FAF6EE]">{item.label}</Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Policies */}
+        <div>
+          <p className="font-sans text-[10px] uppercase tracking-[0.2em] font-medium text-[#E8D39E]">Policies</p>
+          <div className="mt-6 space-y-3">
+            {['Shipping & Returns', 'Privacy Policy', 'Terms of Service', 'BIS Certification', 'Hallmark Guarantee'].map((item) => (
+              <span key={item} className="block font-sans text-sm text-[#FAF6EE]/80">{item}</span>
+            ))}
+          </div>
+        </div>
+
+        {/* Contact */}
+        <div>
+          <p className="font-sans text-[10px] uppercase tracking-[0.2em] font-medium text-[#E8D39E]">Visit Our Atelier</p>
+          <div className="mt-6 space-y-4">
+            <div>
+              <p className="font-sans text-sm text-[#FAF6EE]/80">Flagship Showroom</p>
+              <p className="font-sans text-sm text-[#FAF6EE]/80">Johari Bazar / MI Road</p>
+              <p className="font-sans text-sm text-[#FAF6EE]/80">Jaipur, Rajasthan 302001</p>
+            </div>
+            <div>
+              <p className="font-sans text-sm text-[#FAF6EE]/80">By Appointment</p>
+              <p className="font-sans text-sm text-[#FAF6EE]/80">+91 98XXX XXXXX</p>
+              <p className="font-sans text-sm text-[#FAF6EE]/80">heritage@shreeramjewellers.in</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Trust Badges & Copyright */}
+      <div className="mx-auto mt-14 max-w-[1280px] border-t border-[#C89D47]/25 pt-8">
+        <div className="flex flex-wrap items-center justify-center gap-4 gap-y-2 mb-6">
+          {['100% BIS Hallmarked 916 Gold', 'GIA & IGI Certified Diamonds', 'Insured Pan-India & Global Delivery'].map((badge) => (
+            <span key={badge} className="flex items-center gap-2 font-sans text-[9px] uppercase tracking-[0.15em] text-[#E8D39E]/70">
+              <span className="h-1 w-1 rounded-full bg-[#C89D47]/50" />
+              {badge}
+            </span>
+          ))}
+        </div>
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <p className="font-sans text-xs text-[#FAF6EE]/80">
+            &copy; 2026 Shreeram Jewellers, Jaipur. All Rights Reserved.
+          </p>
+          <p className="font-sans text-[9px] uppercase tracking-widest text-[#E8D39E]/70">
+            Heritage Karigari Since 1952
+          </p>
+        </div>
+        <div className="mt-6 text-center">
+          <p className="font-sans text-xs text-[#FAF6EE]/60">
+            Handcrafted digitally by{" "}
+            <a
+              href="https://teksquad.tech"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#E8D39E] hover:text-[#FAF6EE] underline underline-offset-4 decoration-[#C89D47]/40 hover:decoration-[#FAF6EE] transition-colors"
+            >
+              TekSquad
+            </a>
+          </p>
+        </div>
+      </div>
+    </footer>
+  )
+}
+</file>
+
+<file path="components/site-header.tsx">
+'use client'
+
+import Link from 'next/link'
+import { Heart, Menu, Search, ShoppingBag, X, User } from 'lucide-react'
+import { useState } from 'react'
+import { useCart } from '@/components/cart-context'
+import { useWishlist } from '@/components/wishlist-context'
+import { SearchModal } from '@/components/search-modal'
+
+const links = [
+  ['Heritage', '/products'],
+  ['Bridal', '/products?category=Sets'],
+  ['The Atelier', '/about'],
+  ['Concierge', '/care'],
+  ['Contact', '/contact'],
+]
+
+const megaMenu = {
+  Heritage: [
+    { label: 'Jadau & Polki', href: '/products?category=Chokers' },
+    { label: 'Meenakari', href: '/products?category=Bangles' },
+    { label: 'Royal Rajputi', href: '/products?category=Necklaces' },
+    { label: 'Temple Gold', href: '/products?category=Necklaces' },
+    { label: 'All Collections', href: '/products' },
+  ],
+  Bridal: [
+    { label: 'Bridal Sets', href: '/products?category=Sets' },
+    { label: 'Chokers', href: '/products?category=Chokers' },
+    { label: 'Necklaces', href: '/products?category=Necklaces' },
+    { label: 'Earrings', href: '/products?category=Earrings' },
+    { label: 'Bangles', href: '/products?category=Bangles' },
+  ],
+}
+
+export function SiteHeader() {
+  const [open, setOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const { count, openCart } = useCart()
+  const { count: wishlistCount } = useWishlist()
+
+  return (
+    <>
+      <header className="fixed top-[36px] left-0 right-0 z-50 mx-3 md:mx-6 rounded-full bg-[#FAF6EE]/80 backdrop-blur-md border border-[#C89D47]/20 shadow-[0_4px_20px_rgba(74,14,23,0.03)] transition-all duration-300">
+        <div className="flex items-center justify-between px-4 md:px-10 py-3">
+          <Link href="/" className="leading-none">
+            <span className="block font-serif text-[22px] font-semibold tracking-[0.25em] text-[#4A0E17]">SHREERAM</span>
+            <span className="mt-0.5 block font-sans text-[7px] uppercase tracking-[0.3em] text-[#C89D47]">JAIPUR • RAJASTHAN</span>
+          </Link>
+
+          <nav className="hidden items-center gap-8 lg:flex">
+            {links.map(([label, href]) => (
+              <div
+                key={label}
+                className="relative"
+                onMouseEnter={() => megaMenu[label as keyof typeof megaMenu] ? setActiveDropdown(label) : setActiveDropdown(null)}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <Link href={href} className="font-sans text-[11px] uppercase tracking-[0.2em] text-maroon/70 font-normal transition-colors hover:text-maroon">
+                  {label}
+                </Link>
+                {megaMenu[label as keyof typeof megaMenu] && activeDropdown === label && (
+                  <div className="absolute top-full left-0 mt-2 w-56 rounded-2xl bg-[#FAF6EE]/98 backdrop-blur-2xl border border-[#C89D47]/20 shadow-xl p-4 animate-fade-in">
+                    {megaMenu[label as keyof typeof megaMenu].map((item) => (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        className="block px-3 py-2.5 rounded-lg font-sans text-[11px] text-maroon/70 transition-colors hover:bg-maroon/5 hover:text-maroon"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-3 md:gap-4">
+            <button aria-label="Search" onClick={() => setSearchOpen(true)} className="text-maroon/60 transition-colors hover:text-maroon">
+              <Search size={18} strokeWidth={1.5} />
+            </button>
+            <Link href="/wishlist" aria-label="Wishlist" className="relative text-maroon/60 transition-colors hover:text-maroon">
+              <Heart size={18} strokeWidth={1.5} />
+              {wishlistCount > 0 && (
+                <span className="absolute -right-2 -top-1.5 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-maroon px-1 font-sans text-[9px] font-medium text-gold-light">
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
+            <button aria-label="Shopping bag" onClick={openCart} className="relative text-maroon/60 transition-colors hover:text-maroon">
+              <ShoppingBag size={18} strokeWidth={1.5} />
+              {count > 0 && (
+                <span className="absolute -right-2 -top-1.5 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-maroon px-1 font-sans text-[9px] font-medium text-gold-light">
+                  {count}
+                </span>
+              )}
+            </button>
+            <button aria-label="Open menu" onClick={() => setOpen(!open)} className="lg:hidden text-maroon/60">
+              {open ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div className="h-[108px]" />
+
+      {open && (
+        <nav className="glass-dropdown mx-6 mt-2 flex flex-col gap-5 rounded-2xl px-6 py-6 lg:hidden">
+          {links.map(([label, href]) => (
+            <Link key={label} href={href} onClick={() => setOpen(false)} className="font-sans text-[11px] uppercase tracking-[0.2em] text-maroon/60 transition-colors hover:text-maroon">
+              {label}
+            </Link>
+          ))}
+        </nav>
+      )}
+
+      <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
+    </>
+  )
+}
+</file>
+
+<file path="lib/products.ts">
+export type Metal = { name: string; hex: string }
+
+export type Review = {
+  id: string
+  author: string
+  rating: number
+  date: string
+  title: string
+  body: string
+  verified: boolean
+}
+
+export type Product = {
+  id: string
+  code: string
+  name: string
+  price: number
+  originalPrice?: number
+  weight: string
+  category: string
+  collection: string
+  description: string
+  image: string
+  images?: string[]
+  position?: string
+  tags: string[]
+  details: [string, string][]
+  metals: Metal[]
+  rating: number
+  reviewCount: number
+  reviews: Review[]
+  inStock: boolean
+  badge?: string
+}
+
+export const products: Product[] = [
+  {
+    id: 'jaipur-jadau-polki-choker',
+    code: 'SJ-JK-001',
+    name: 'Jaipur Jadau Polki Choker',
+    price: 345000,
+    originalPrice: 380000,
+    weight: '48.2g 22KT',
+    category: 'Chokers',
+    collection: 'Jadau & Polki',
+    description: 'Handcrafted Jadau choker featuring uncut Basra Polki diamonds set in 22KT gold with meenakari reverse work. A masterpiece of Jaipur\'s living heritage.',
+    image: '/hero-jewelry.png',
+    images: ['/hero-jewelry.png', '/jewelry-products.png', '/atelier.png', '/hero-jewelry.png'],
+    position: '58% 45%',
+    tags: ['22KT BIS Hallmarked', 'Natural Basra Pearls', 'Jaipur Jadau'],
+    details: [
+      ['Metal', '22KT Yellow Gold (916 Hallmarked)'],
+      ['Gemstones', 'Uncut Basra Polki Diamonds'],
+      ['Technique', 'Traditional Jadau Kundan Setting'],
+      ['Weight', '48.2 grams Approx.'],
+      ['Origin', 'Handcrafted in Jaipur'],
+    ],
+    metals: [{ name: '22KT Yellow Gold', hex: '#D4AF37' }, { name: '22KT Rose Gold', hex: '#B76E79' }],
+    rating: 4.8,
+    reviewCount: 124,
+    reviews: [
+      { id: 'r1', author: 'Priya M.', rating: 5, date: '2025-08-15', title: 'Absolutely Stunning!', body: 'The craftsmanship is extraordinary. Every Polki diamond is perfectly set. Wore this for my engagement and received countless compliments.', verified: true },
+      { id: 'r2', author: 'Ananya S.', rating: 5, date: '2025-07-22', title: 'Worth Every Penny', body: 'Beautiful piece with excellent weight and finish. The meenakari work on the reverse is equally impressive. True Jaipur heritage.', verified: true },
+      { id: 'r3', author: 'Meera K.', rating: 4, date: '2025-06-10', title: 'Great Quality', body: 'Very happy with the purchase. The choker sits perfectly and the Basra pearls add elegance. Delivery was prompt.', verified: true },
+    ],
+    inStock: true,
+    badge: 'Bestseller',
+  },
+  {
+    id: 'meenakari-heritage-bangles',
+    code: 'SJ-MB-002',
+    name: 'Meenakari Heritage Bangles',
+    price: 189000,
+    weight: '32.6g 22KT',
+    category: 'Bangles',
+    collection: 'Meenakari',
+    description: 'Set of four hand-enameled Meenakari bangles with floral motifs in royal green, crimson, and ivory. Each bangle takes 40 hours of meticulous craftsmanship.',
+    image: '/jewelry-products.png',
+    images: ['/jewelry-products.png', '/hero-jewelry.png', '/atelier.png', '/jewelry-products.png'],
+    position: '52% 18%',
+    tags: ['22KT BIS Hallmarked', 'Meenakari Enamel', 'Jaipur Craft'],
+    details: [
+      ['Metal', '22KT Yellow Gold (916 Hallmarked)'],
+      ['Technique', 'Traditional Jaipur Meenakari'],
+      ['Set', '4 Bangles'],
+      ['Weight', '32.6 grams Approx.'],
+      ['Motifs', 'Royal Floral Paisley'],
+    ],
+    metals: [{ name: '22KT Yellow Gold', hex: '#D4AF37' }],
+    rating: 4.6,
+    reviewCount: 89,
+    reviews: [
+      { id: 'r4', author: 'Deepa R.', rating: 5, date: '2025-09-01', title: 'Vibrant Colors!', body: 'The meenakari colors are so vibrant and rich. These bangles are a work of art. Perfect for weddings.', verified: true },
+      { id: 'r5', author: 'Kavita J.', rating: 4, date: '2025-08-05', title: 'Beautiful Craftsmanship', body: 'Love the floral motifs. The enamel work is very detailed. Slightly heavier than expected but that speaks to the quality.', verified: true },
+    ],
+    inStock: true,
+  },
+  {
+    id: 'royal-rajputi-aad',
+    code: 'SJ-RA-003',
+    name: 'Royal Rajputi Aad Necklace',
+    price: 525000,
+    weight: '72.8g 22KT',
+    category: 'Necklaces',
+    collection: 'Royal Rajputi',
+    description: 'A magnificent Rajputi Aad necklace featuring cascading Polki diamonds and natural emeralds in a traditional rigid collar setting. The crown jewel of Rajasthani bridal trousseaux.',
+    image: '/hero-jewelry.png',
+    images: ['/hero-jewelry.png', '/jewelry-products.png', '/atelier.png', '/hero-jewelry.png'],
+    position: '30% 45%',
+    tags: ['22KT BIS Hallmarked', 'GIA Certified', 'Bridal Heritage'],
+    details: [
+      ['Metal', '22KT Yellow Gold (916 Hallmarked)'],
+      ['Gemstones', 'Polki Diamonds & Colombian Emeralds'],
+      ['Style', 'Traditional Rajputi Aad Collar'],
+      ['Weight', '72.8 grams Approx.'],
+      ['Occasion', 'Bridal & Royal Ceremonies'],
+    ],
+    metals: [{ name: '22KT Yellow Gold', hex: '#D4AF37' }],
+    rating: 4.9,
+    reviewCount: 67,
+    reviews: [
+      { id: 'r6', author: 'Shreya V.', rating: 5, date: '2025-09-10', title: 'Royal Elegance', body: 'This Aad necklace is truly majestic. The Polki diamonds catch light beautifully. My wedding jewellery is sorted!', verified: true },
+    ],
+    inStock: true,
+    badge: 'New',
+  },
+  {
+    id: 'temple-gold-emerald-haram',
+    code: 'SJ-TH-004',
+    name: 'Temple Gold & Emerald Haram',
+    price: 412000,
+    weight: '56.4g 22KT',
+    category: 'Necklaces',
+    collection: 'Temple Gold',
+    description: 'An elaborate temple gold haram with hand-carved Lakshmi motifs and Zambian emerald drops. Inspired by the sacred jewellery traditions of South Indian temples.',
+    image: '/jewelry-products.png',
+    images: ['/jewelry-products.png', '/hero-jewelry.png', '/atelier.png', '/jewelry-products.png'],
+    position: '95% 12%',
+    tags: ['22KT BIS Hallmarked', 'Natural Emeralds', 'Temple Heritage'],
+    details: [
+      ['Metal', '22KT Yellow Gold (916 Hallmarked)'],
+      ['Gemstones', 'Zambian Emeralds & Seed Pearls'],
+      ['Motifs', 'Goddess Lakshmi Temple Design'],
+      ['Weight', '56.4 grams Approx.'],
+      ['Length', '22 inches Traditional Haram'],
+    ],
+    metals: [{ name: '22KT Yellow Gold', hex: '#D4AF37' }],
+    rating: 4.7,
+    reviewCount: 53,
+    reviews: [
+      { id: 'r7', author: 'Lakshmi N.', rating: 5, date: '2025-07-18', title: 'Divine Beauty', body: 'The Lakshmi motifs are so intricate. This haram is a masterpiece of temple jewellery. Highly recommended for South Indian brides.', verified: true },
+    ],
+    inStock: true,
+  },
+  {
+    id: 'hasli-heritage-necklace',
+    code: 'SJ-HN-005',
+    name: 'Hasli Heritage Necklace',
+    price: 278000,
+    weight: '38.5g 22KT',
+    category: 'Necklaces',
+    collection: 'Royal Rajputi',
+    description: 'A bold traditional Hasli necklace with rigid torque design and hanging gold bead drops. Timeless Rajasthani silversmith artistry reimagined in 22KT gold.',
+    image: '/atelier.png',
+    images: ['/atelier.png', '/hero-jewelry.png', '/jewelry-products.png', '/atelier.png'],
+    position: '60% 40%',
+    tags: ['22KT BIS Hallmarked', 'Artisan Made', 'Heritage Design'],
+    details: [
+      ['Metal', '22KT Yellow Gold (916 Hallmarked)'],
+      ['Style', 'Traditional Hasli Torque'],
+      ['Finish', 'Heritage Antiqued Gold'],
+      ['Weight', '38.5 grams Approx.'],
+      ['Closure', 'Traditional Hook Clasp'],
+    ],
+    metals: [{ name: '22KT Yellow Gold', hex: '#D4AF37' }, { name: '22KT Oxidized Gold', hex: '#8B7355' }],
+    rating: 4.5,
+    reviewCount: 41,
+    reviews: [
+      { id: 'r8', author: 'Ritu A.', rating: 5, date: '2025-08-20', title: 'Unique Design', body: 'Love the torque design. It sits beautifully on the neck. The antiqued finish gives it a royal look.', verified: true },
+    ],
+    inStock: true,
+  },
+  {
+    id: 'kundan-polki-earrings',
+    code: 'SJ-KE-006',
+    name: 'Kundan Polki Jhumka Earrings',
+    price: 156000,
+    weight: '22.4g 22KT',
+    category: 'Earrings',
+    collection: 'Jadau & Polki',
+    description: 'Exquisite Kundan Polki jhumkas with pear-shaped Basra pearl drops and meenakari detailing on the reverse. Each earring is a miniature work of art.',
+    image: '/jewelry-products.png',
+    images: ['/jewelry-products.png', '/hero-jewelry.png', '/atelier.png', '/jewelry-products.png'],
+    position: '94% 15%',
+    tags: ['22KT BIS Hallmarked', 'Natural Basra Pearls', 'Kundan Craft'],
+    details: [
+      ['Metal', '22KT Yellow Gold (916 Hallmarked)'],
+      ['Gemstones', 'Uncut Polki & Basra Pearls'],
+      ['Style', 'Traditional Jhumka Drop'],
+      ['Weight', '22.4 grams Approx.'],
+      ['Back', 'Meenakari Enamel Work'],
+    ],
+    metals: [{ name: '22KT Yellow Gold', hex: '#D4AF37' }],
+    rating: 4.8,
+    reviewCount: 98,
+    reviews: [
+      { id: 'r9', author: 'Nisha P.', rating: 5, date: '2025-09-05', title: 'Perfect Jhumkas', body: 'These are the most beautiful jhumkas I own. The Basra pearl drops add such elegance. True heritage piece.', verified: true },
+      { id: 'r10', author: 'Varsha G.', rating: 5, date: '2025-08-12', title: 'Exquisite Craft', body: 'The meenakari work on the reverse is stunning. You can tell these are handcrafted with love. Worth every rupee.', verified: true },
+    ],
+    inStock: true,
+    badge: 'Bestseller',
+  },
+  {
+    id: 'bridal-kundan-set',
+    code: 'SJ-BK-007',
+    name: 'Bridal Kundan Parure Set',
+    price: 890000,
+    originalPrice: 950000,
+    weight: '112.5g 22KT',
+    category: 'Sets',
+    collection: 'Jadau & Polki',
+    description: 'Complete bridal parure featuring necklace, earrings, maang tikka, and bangles in elaborate Kundan Jadau work. The definitive Jaipur bridal trousseau centrepiece.',
+    image: '/hero-jewelry.png',
+    images: ['/hero-jewelry.png', '/jewelry-products.png', '/atelier.png', '/hero-jewelry.png'],
+    position: '50% 30%',
+    tags: ['22KT BIS Hallmarked', 'Bridal Collection', 'Jadau Parure'],
+    details: [
+      ['Metal', '22KT Yellow Gold (916 Hallmarked)'],
+      ['Gemstones', 'Polki, Emeralds, Basra Pearls'],
+      ['Set', 'Necklace, Earrings, Tikka, Bangles'],
+      ['Weight', '112.5 grams Approx.'],
+      ['Occasion', 'Bridal Trousseau'],
+    ],
+    metals: [{ name: '22KT Yellow Gold', hex: '#D4AF37' }],
+    rating: 4.9,
+    reviewCount: 34,
+    reviews: [
+      { id: 'r11', author: 'Divya M.', rating: 5, date: '2025-09-12', title: 'Dream Bridal Set', body: 'This parure is every bride\'s dream. The craftsmanship is museum-quality. My wedding photos looked stunning because of this set.', verified: true },
+    ],
+    inStock: true,
+    badge: 'Premium',
+  },
+  {
+    id: 'polki-chandbali-earrings',
+    code: 'SJ-PC-008',
+    name: 'Polki Chandbali Earrings',
+    price: 215000,
+    originalPrice: 240000,
+    weight: '28.6g 22KT',
+    category: 'Earrings',
+    collection: 'Jadau & Polki',
+    description: 'Crescent-shaped Chandbali earrings with tiered Polki diamonds and tiny pearl fringes. A nod to the royal courts of Rajputana.',
+    image: '/jewelry-products.png',
+    images: ['/jewelry-products.png', '/hero-jewelry.png', '/atelier.png', '/jewelry-products.png'],
+    position: '18% 10%',
+    tags: ['22KT BIS Hallmarked', 'Polki Diamonds', 'Rajputana Design'],
+    details: [
+      ['Metal', '22KT Yellow Gold (916 Hallmarked)'],
+      ['Gemstones', 'Uncut Polki Diamonds'],
+      ['Style', 'Chandbali Crescent Drop'],
+      ['Weight', '28.6 grams Approx.'],
+      ['Finish', 'Heritage Gold Polish'],
+    ],
+    metals: [{ name: '22KT Yellow Gold', hex: '#D4AF37' }, { name: '22KT Rose Gold', hex: '#B76E79' }],
+    rating: 4.7,
+    reviewCount: 76,
+    reviews: [
+      { id: 'r12', author: 'Pooja L.', rating: 5, date: '2025-08-28', title: 'Royal Look', body: 'These chandbalis make me feel like royalty. The pearl fringes move so gracefully. Absolutely love them!', verified: true },
+    ],
+    inStock: true,
+    badge: 'Sale',
+  },
+]
+
+export const formatPrice = (price: number) => `₹${price.toLocaleString('en-IN')}`
+
+export const getProduct = (id: string) => products.find((product) => product.id === id) ?? products[0]
+
+export const relatedProducts = (id: string) => products.filter((product) => product.id !== id).slice(0, 4)
+
+export const searchProducts = (query: string) => {
+  const q = query.toLowerCase()
+  return products.filter(
+    (p) =>
+      p.name.toLowerCase().includes(q) ||
+      p.category.toLowerCase().includes(q) ||
+      p.collection.toLowerCase().includes(q) ||
+      p.description.toLowerCase().includes(q) ||
+      p.tags.some((t) => t.toLowerCase().includes(q))
+  )
+}
+
+export const collections = [
+  { name: 'Jadau & Polki', image: '/jewelry-products.png', position: '5% 5%', count: 3 },
+  { name: 'Meenakari', image: '/hero-jewelry.png', position: '30% 45%', count: 1 },
+  { name: 'Royal Rajputi', image: '/jewelry-products.png', position: '94% 15%', count: 2 },
+  { name: 'Temple Gold', image: '/jewelry-products.png', position: '94% 92%', count: 1 },
+  { name: 'Bridal Trousseau', image: '/atelier.png', position: '65% 50%', count: 1 },
+] as const
+
+export const categories = ['Chokers', 'Necklaces', 'Bangles', 'Earrings', 'Sets'] as const
+
+export const announcements = [
+  'Complimentary Insured Pan-India Delivery on All Orders',
+  'BIS Hallmarked 916 Gold — Certified Purity Guaranteed',
+  'GIA & IGI Certified Diamonds — Book Your Private Viewing',
+  'Zero Making Charges on Select Gold Collections',
+]
+</file>
+
+<file path="next-env.d.ts">
+/// <reference types="next" />
+/// <reference types="next/image-types/global" />
+import "./.next/types/routes.d.ts";
+import "./.next/types/root-params.d.ts";
+
+// NOTE: This file should not be edited
+// see https://nextjs.org/docs/app/api-reference/config/typescript for more information.
+</file>
+
+<file path="app/products/[id]/page.tsx">
+'use client'
+import { useState } from 'react'
+import { MessageCircle, ShieldCheck, Star, Heart, Share2 } from 'lucide-react'
+import { getProduct, relatedProducts, formatPrice } from '@/lib/products'
+import { ProductCard } from '@/components/product-card'
+import { ReviewsSection } from '@/components/reviews-section'
+import { PincodeChecker } from '@/components/pincode-checker'
+import { useWishlist } from '@/components/wishlist-context'
+import { useCart } from '@/components/cart-context'
+
+export default function ProductDetailPage({ params }: { params: { id: string } }) {
+  const product = getProduct(params.id)
+  const [selectedImage, setSelectedImage] = useState(0)
+  const [selectedMetal, setSelectedMetal] = useState(product.metals[0]?.name ?? '')
+  const { toggle, has } = useWishlist()
+  const { add, openCart } = useCart()
+  const isWishlisted = has(product.id)
+
+  const images = product.images || [product.image]
+
+  const whatsappUrl = `https://wa.me/9198XXXXXXXX?text=${encodeURIComponent(`Hi, I'm interested in ${product.name} (${product.code}). Please share details.`)}`
+
+  return (
+    <main>
+      <div className="mx-auto grid max-w-[1280px] gap-8 px-6 py-12 md:grid-cols-2 md:px-20 md:py-20">
+        {/* Images */}
+        <div>
+          <div className="hero-jharokha-border aspect-square overflow-hidden rounded-t-[3rem] rounded-b-2xl bg-[#FAF6EE] border-2 border-[#C89D47]/40 p-2.5 shadow-[0_8px_24px_rgba(74,14,23,0.04)]">
+            <div className="hero-jharokha overflow-hidden h-full">
+              <img
+                src={images[selectedImage]}
+                alt={product.name}
+                style={{ objectPosition: product.position }}
+                className="h-full w-full rounded-t-[2.5rem] rounded-b-xl object-cover transition-opacity duration-300"
+              />
+            </div>
+          </div>
+          <div className="mt-4 grid grid-cols-4 gap-3">
+            {images.map((image, index) => (
+              <button
+                key={`${image}-${index}`}
+                onClick={() => setSelectedImage(index)}
+                className={`aspect-square overflow-hidden rounded-xl border-2 transition-all duration-200 ${
+                  index === selectedImage ? 'border-gold ring-1 ring-gold/20' : 'border-[#E5DDD0] hover:border-gold/40'
+                }`}
+              >
+                <img src={image} alt="" className="h-full w-full object-cover" />
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Details */}
+        <div>
+          <div className="flex items-center gap-2">
+            <p className="font-sans text-[9px] uppercase tracking-[0.25em] text-gold-dark">{product.code}</p>
+            <span className="text-gold/30">&bull;</span>
+            <span className="font-sans text-[9px] uppercase tracking-[0.2em] text-emerald-heritage">{product.inStock ? 'In Stock' : 'Made to Order'}</span>
+          </div>
+
+          <h1 className="mt-5 font-serif text-4xl leading-tight text-maroon md:text-5xl">{product.name}</h1>
+
+          {/* Rating */}
+          <div className="mt-3 flex items-center gap-3">
+            <div className="flex items-center gap-0.5">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <Star key={star} size={14} className={star <= Math.round(product.rating) ? 'fill-gold text-gold' : 'fill-none text-maroon/20'} />
+              ))}
+            </div>
+            <span className="font-sans text-sm text-maroon/50">{product.rating} ({product.reviewCount} reviews)</span>
+          </div>
+
+          {/* Tags */}
+          <div className="mt-4 flex flex-wrap gap-2">
+            {product.tags.map((tag) => (
+              <span key={tag} className="inline-flex items-center gap-1.5 rounded-full border border-gold/20 bg-gold/5 px-3 py-1 font-sans text-[9px] uppercase tracking-[0.1em] text-gold-dark">
+                <ShieldCheck size={10} />
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {/* Price & Weight */}
+          <div className="mt-6 flex items-baseline gap-3">
+            <span className="font-sans text-2xl font-medium text-maroon">{formatPrice(product.price)}</span>
+            {product.originalPrice && (
+              <span className="font-sans text-sm text-maroon/30 line-through">{formatPrice(product.originalPrice)}</span>
+            )}
+            <span className="font-sans text-sm text-maroon/40">| Approx. {product.weight}</span>
+          </div>
+
+          <p className="mt-6 font-sans text-sm leading-7 text-maroon/50">{product.description}</p>
+
+          {/* Metal Selection */}
+          {product.metals.length > 1 && (
+            <div className="mt-6">
+              <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-maroon/50 mb-3">Metal: {selectedMetal}</p>
+              <div className="flex gap-3">
+                {product.metals.map((metal) => (
+                  <button
+                    key={metal.name}
+                    onClick={() => setSelectedMetal(metal.name)}
+                    className={`flex items-center gap-2 rounded-full border px-4 py-2.5 transition-all duration-300 ${
+                      selectedMetal === metal.name
+                        ? 'border-gold bg-maroon text-gold-light shadow-[0_0_15px_rgba(200,157,71,0.2)]'
+                        : 'border-[#C89D47]/20 bg-white/60 text-maroon hover:border-gold/40'
+                    }`}
+                  >
+                    <span className="h-4 w-4 rounded-full border border-white/20" style={{ backgroundColor: metal.hex }} />
+                    <span className="font-sans text-[10px] uppercase tracking-[0.1em]">{metal.name}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Specifications */}
+          <div className="mt-8 space-y-3">
+            {product.details.map(([label, value]) => (
+              <div key={label} className="flex items-center justify-between border-b border-[#C89D47]/10 pb-3">
+                <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-maroon/40">{label}</span>
+                <span className="font-sans text-sm text-maroon">{value}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* CTAs */}
+          <div className="mt-8 flex flex-col gap-3">
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-maroon border border-gold/40 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold-light transition-all duration-300 hover:bg-maroon-dark hover:shadow-[0_0_25px_rgba(200,157,71,0.45)] active:scale-[0.98]"
+            >
+              <MessageCircle size={14} />
+              Enquire on WhatsApp
+            </a>
+            <div className="flex gap-3">
+              <button
+                onClick={() => toggle(product)}
+                className={`flex h-12 flex-1 items-center justify-center gap-2 rounded-full border font-sans text-[10px] font-medium uppercase tracking-[0.2em] transition-all duration-300 ${
+                  isWishlisted
+                    ? 'border-gold bg-gold/10 text-gold-dark'
+                    : 'border-maroon/20 bg-white/60 text-maroon hover:border-maroon hover:bg-maroon hover:text-gold-light'
+                }`}
+              >
+                <Heart size={14} className={isWishlisted ? 'fill-gold' : ''} />
+                {isWishlisted ? 'Saved' : 'Save'}
+              </button>
+              <button
+                onClick={() => {
+                  add(product)
+                  openCart()
+                }}
+                className="flex h-12 flex-1 items-center justify-center gap-2 rounded-full border border-maroon/20 bg-white/60 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-maroon transition-all duration-300 hover:border-maroon hover:bg-maroon hover:text-gold-light"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          {/* Pincode Checker */}
+          <div className="mt-6">
+            <PincodeChecker />
+          </div>
+
+          {/* Trust Signals */}
+          <div className="mt-8 flex flex-wrap items-center gap-4 gap-y-2">
+            {['BIS Hallmarked 916', 'GIA Certified', 'Insured Delivery', 'Easy Returns'].map((badge) => (
+              <span key={badge} className="flex items-center gap-1.5 font-sans text-[9px] uppercase tracking-[0.15em] text-maroon/30">
+                <span className="h-1 w-1 rounded-full bg-gold/40" />
+                {badge}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Reviews */}
+      <section className="mx-auto max-w-[1280px] px-6 md:px-20">
+        <ReviewsSection reviews={product.reviews} rating={product.rating} reviewCount={product.reviewCount} />
+      </section>
+
+      {/* Related */}
+      <section className="mx-auto max-w-[1280px] px-6 py-16 md:px-20">
+        <div className="flex items-center justify-center gap-4">
+          <div className="h-px w-16 bg-gold/40" />
+          <p className="font-sans text-[9px] uppercase tracking-[0.3em] text-gold-dark">You May Also Adore</p>
+          <div className="h-px w-16 bg-gold/40" />
+        </div>
+        <h2 className="mt-4 text-center font-serif text-4xl text-maroon">Heritage Selections</h2>
+        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {relatedProducts(product.id).map((p) => (
+            <ProductCard key={p.id} product={p} />
+          ))}
+        </div>
+      </section>
+    </main>
+  )
+}
+</file>
+
+<file path="app/products/page.tsx">
+'use client'
+import { Suspense, useMemo, useState, useEffect } from 'react'
+import { Grid3X3, LayoutList, SlidersHorizontal, X } from 'lucide-react'
+import { products, collections, categories } from '@/lib/products'
+import { ProductCard } from '@/components/product-card'
+import { useSearchParams } from 'next/navigation'
+
+const sortOptions = ['Featured', 'Price: Low to High', 'Price: High to Low', 'Newest', 'Best Rated']
+
+function ProductsContent() {
+  const searchParams = useSearchParams()
+  const initialCategory = searchParams.get('category') || 'All'
+  const initialQuery = searchParams.get('q') || ''
+
+  const [category, setCategory] = useState(initialCategory)
+  const [sort, setSort] = useState('Featured')
+  const [view, setView] = useState<'grid' | 'list'>('grid')
+  const [searchQuery, setSearchQuery] = useState(initialQuery)
+
+  useEffect(() => {
+    const cat = searchParams.get('category')
+    const q = searchParams.get('q')
+    if (cat) setCategory(cat)
+    if (q) setSearchQuery(q)
+  }, [searchParams])
+
+  const filtered = useMemo(() => {
+    let result = category === 'All' ? [...products] : products.filter((p) => p.category === category)
+
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase()
+      result = result.filter(
+        (p) =>
+          p.name.toLowerCase().includes(q) ||
+          p.collection.toLowerCase().includes(q) ||
+          p.description.toLowerCase().includes(q) ||
+          p.tags.some((t) => t.toLowerCase().includes(q))
+      )
+    }
+
+    return result.sort((a, b) =>
+      sort === 'Price: Low to High' ? a.price - b.price :
+      sort === 'Price: High to Low' ? b.price - a.price :
+      sort === 'Newest' ? (b.badge === 'New' ? 1 : 0) - (a.badge === 'New' ? 1 : 0) :
+      sort === 'Best Rated' ? b.rating - a.rating : 0
+    )
+  }, [category, sort, searchQuery])
+
+  const activeCollection = collections.find((c) => c.name === category)
+
+  return (
+    <main className="mx-auto max-w-[1280px] px-6 py-14 md:px-20 md:py-16">
+      <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-maroon/40">
+        Home&nbsp; / &nbsp;<span className="text-maroon">Heritage Collections</span>
+      </p>
+      <h1 className="mt-5 font-serif text-5xl text-maroon md:text-6xl">
+        {activeCollection ? activeCollection.name : 'The Royal Karigari'}
+      </h1>
+      <p className="mt-3 max-w-xl font-sans text-sm text-maroon/40">
+        Authentic Rajasthani fine jewellery. Jadau, Meenakari, Kundan &amp; Polki — each piece handcrafted by master karigars of Jaipur.
+      </p>
+
+      {searchQuery && (
+        <div className="mt-4 flex items-center gap-2">
+          <span className="font-sans text-sm text-maroon/50">Showing results for:</span>
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-maroon/10 px-3 py-1 font-sans text-xs text-maroon">
+            {searchQuery}
+            <button onClick={() => setSearchQuery('')} className="hover:text-maroon-dark">
+              <X size={12} />
+            </button>
+          </span>
+        </div>
+      )}
+
+      <div className="mt-10 grid gap-10 lg:grid-cols-[280px_1fr]">
+        <aside className="hidden bg-white/70 backdrop-blur-lg border border-[#C89D47]/25 rounded-2xl p-6 shadow-[0_8px_24px_rgba(74,14,23,0.04)] lg:block h-fit sticky top-28">
+          <div className="flex items-center justify-between">
+            <span className="font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-maroon">Filter by</span>
+            <button onClick={() => { setCategory('All'); setSearchQuery('') }} className="font-sans text-[10px] uppercase tracking-[0.2em] text-gold-dark transition-colors hover:text-maroon">Clear All</button>
+          </div>
+          <div className="mt-8 border-t border-[#C89D47]/10 pt-8">
+            <p className="font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-maroon/40">Category</p>
+            <div className="mt-4 space-y-3">
+              {['All', ...categories].map((item) => (
+                <label key={item} className="flex gap-3 font-sans text-sm text-maroon/70 cursor-pointer">
+                  <input type="radio" name="category" checked={category === item} onChange={() => setCategory(item)} className="accent-[#C89D47]" />
+                  {item}
+                </label>
+              ))}
+            </div>
+          </div>
+          <div className="mt-8 border-t border-[#C89D47]/10 pt-8">
+            <p className="font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-maroon/40">Collection</p>
+            <div className="mt-4 space-y-3">
+              {collections.map((item) => (
+                <label key={item.name} className="flex gap-3 font-sans text-sm text-maroon/70 cursor-pointer">
+                  <input type="radio" name="collection" checked={category === item.name} onChange={() => setCategory(item.name)} className="accent-[#C89D47]" />
+                  {item.name}
+                </label>
+              ))}
+            </div>
+          </div>
+        </aside>
+
+        <section>
+          <div className="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-[#C89D47]/10 pb-4">
+            <p className="font-sans text-sm text-maroon/50">
+              Showing {filtered.length} heritage piece{filtered.length !== 1 ? 's' : ''}
+            </p>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3 font-sans text-sm text-maroon/70">
+                <SlidersHorizontal size={16} className="lg:hidden" />
+                <label htmlFor="sort">Sort by:</label>
+                <select id="sort" value={sort} onChange={(e) => setSort(e.target.value)} className="bg-transparent text-maroon outline-none cursor-pointer">
+                  {sortOptions.map((opt) => (
+                    <option key={opt}>{opt}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="hidden items-center gap-1 border-l border-[#C89D47]/15 pl-4 lg:flex">
+                <button
+                  onClick={() => setView('grid')}
+                  className={`p-1.5 rounded-lg transition-colors ${view === 'grid' ? 'bg-[#F5F0E5] text-maroon' : 'text-maroon/30 hover:text-maroon/60'}`}
+                  aria-label="Grid view"
+                >
+                  <Grid3X3 size={16} />
+                </button>
+                <button
+                  onClick={() => setView('list')}
+                  className={`p-1.5 rounded-lg transition-colors ${view === 'list' ? 'bg-[#F5F0E5] text-maroon' : 'text-maroon/30 hover:text-maroon/60'}`}
+                  aria-label="List view"
+                >
+                  <LayoutList size={16} />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="mb-8 flex gap-2 overflow-x-auto lg:hidden scrollbar-hide -mx-6 px-6">
+            {['All', ...categories].map((item) => (
+              <button
+                key={item}
+                onClick={() => setCategory(item)}
+                className={`whitespace-nowrap rounded-full border px-4 py-2 font-sans text-[10px] uppercase tracking-[0.15em] transition-all duration-200 ${
+                  category === item
+                    ? 'border-maroon bg-maroon text-gold-light'
+                    : 'border-[#C89D47]/25 text-maroon/60 hover:border-gold/40'
+                }`}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+
+          <div className={
+            view === 'grid'
+              ? 'grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3'
+              : 'flex flex-col gap-6'
+          }>
+            {filtered.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+
+          {filtered.length === 0 && (
+            <div className="flex flex-col items-center justify-center py-20 text-center">
+              <p className="font-serif text-2xl text-maroon">No heritage pieces found</p>
+              <p className="mt-2 font-sans text-sm text-maroon/40">Try adjusting your filters or search</p>
+              <button onClick={() => { setCategory('All'); setSearchQuery('') }} className="mt-6 rounded-full border border-maroon/20 px-6 py-2.5 font-sans text-[10px] uppercase tracking-[0.2em] text-maroon transition-colors hover:bg-maroon hover:text-gold-light">
+                View All Heritage
+              </button>
+            </div>
+          )}
+        </section>
+      </div>
+    </main>
+  )
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={
+      <main className="mx-auto max-w-[1280px] px-6 py-14 md:px-20 md:py-16">
+        <div className="flex items-center justify-center py-20">
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-gold border-t-transparent" />
+        </div>
+      </main>
+    }>
+      <ProductsContent />
+    </Suspense>
+  )
+}
+</file>
+
+<file path="app/page.tsx">
+'use client'
+
+import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
+import { useRef, useState } from 'react'
+import { products } from '@/lib/products'
+import { ProductCard } from '@/components/product-card'
+import { HeroSlideshow } from '@/components/hero-slideshow'
+import { CollectionCards } from '@/components/collection-cards'
+
+const metalOptions = [
+  { id: '22kt-yellow', label: '22KT Yellow Gold', subtitle: 'Timeless temple gold with rich warm lustre' },
+  { id: 'rose-polki', label: 'Rose Polki', subtitle: 'Uncut diamonds set in blush rose gold' },
+  { id: 'uncut-solitaire', label: 'Uncut Solitaire', subtitle: 'Raw Polki diamonds with kundan setting' },
+]
+
+export default function HomePage() {
+  const [activeMetal, setActiveMetal] = useState('22kt-yellow')
+  const heroRef = useRef<HTMLDivElement>(null)
+  const [tilt, setTilt] = useState({ x: 0, y: 0 })
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!heroRef.current) return
+    const rect = heroRef.current.getBoundingClientRect()
+    const x = (e.clientX - rect.left) / rect.width - 0.5
+    const y = (e.clientY - rect.top) / rect.height - 0.5
+    setTilt({ x: y * -8, y: x * 8 })
+  }
+
+  const handleMouseLeave = () => setTilt({ x: 0, y: 0 })
+
+  const activeMetalData = metalOptions.find((m) => m.id === activeMetal)
+
+  return (
+    <main>
+      {/* Hero Slideshow */}
+      <HeroSlideshow />
+
+      {/* Heritage Intro */}
+      <section className="relative min-h-[500px] overflow-hidden bg-gradient-to-b from-[#FAF6EE] via-[#F5F0E5] to-[#FAF6EE]">
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23C89D47\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }} />
+
+        <div className="pointer-events-none absolute -right-32 top-1/4 h-[400px] w-[400px] rounded-full bg-gradient-to-tr from-[#C89D47]/15 to-transparent blur-3xl animate-float-glow" />
+
+        <div className="mx-auto grid max-w-[1280px] min-h-[500px] items-center px-6 py-20 md:grid-cols-2 md:px-20 md:py-0">
+          <div className="relative z-10 max-w-[480px]">
+            <div className="flex items-center gap-3">
+              <div className="h-px w-12 bg-gold" />
+              <p className="font-sans text-[9px] uppercase tracking-[0.3em] text-gold-dark">Jaipur, Rajasthan &bull; Est. 1952</p>
+            </div>
+
+            <h1 className="mt-5 font-serif text-[2.75rem] leading-[1.05] text-maroon md:text-6xl lg:text-7xl">
+              The Pink City&apos;s<br />Heritage Karigari
+            </h1>
+
+            <p className="mt-7 max-w-[400px] font-sans text-sm leading-7 text-maroon/50">
+              Three generations of master karigars. Jadau, Polki, Kundan &amp; temple gold jewellery handcrafted in Jaipur&apos;s atelier since 1952. BIS Hallmarked 916 Gold. GIA &amp; IGI Certified.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/products" className="inline-flex items-center gap-2 rounded-full bg-maroon border border-gold/40 px-8 py-3.5 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold-light transition-all duration-300 hover:bg-maroon-dark hover:shadow-[0_0_25px_rgba(200,157,71,0.45)] active:scale-95">
+                Explore the Heritage
+              </Link>
+              <Link href="/about" className="inline-flex items-center gap-2 rounded-full border border-maroon/20 bg-white/60 px-6 py-3.5 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-maroon transition-all duration-300 hover:bg-maroon hover:text-gold-light hover:border-maroon hover:shadow-[0_0_25px_rgba(200,157,71,0.35)] active:scale-95">
+                Visit Our Atelier
+              </Link>
+            </div>
+
+            <div className="mt-8">
+              <p className="font-sans text-[9px] uppercase tracking-[0.2em] text-maroon/40 mb-3">View In:</p>
+              <div className="flex flex-wrap gap-2">
+                {metalOptions.map((metal) => (
+                  <button
+                    key={metal.id}
+                    onClick={() => setActiveMetal(metal.id)}
+                    className={`rounded-full border px-3 py-1.5 font-sans text-[10px] uppercase tracking-[0.1em] transition-all duration-300 ${
+                      activeMetal === metal.id
+                        ? 'bg-maroon border-gold/40 text-gold-light shadow-[0_0_15px_rgba(200,157,71,0.2)]'
+                        : 'bg-white/80 border-[#C89D47]/30 text-maroon/60 hover:bg-maroon hover:text-white hover:border-maroon'
+                    }`}
+                  >
+                    {metal.label}
+                  </button>
+                ))}
+              </div>
+              {activeMetalData && (
+                <p className="mt-3 font-sans text-[11px] text-maroon/40 italic transition-all duration-300">
+                  {activeMetalData.subtitle}
+                </p>
+              )}
+            </div>
+
+            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
+              {['BIS Hallmarked 916 Gold', 'GIA & IGI Certified', 'Crafted in Jaipur'].map((badge) => <span key={badge} className="flex items-center gap-2 font-sans text-[9px] uppercase tracking-[0.15em] text-maroon/40"><span className="h-1 w-1 rounded-full bg-gold" />{badge}</span>)}
+            </div>
+          </div>
+
+          {/* Right: Jharokha Arch Hero Image with 3D Tilt */}
+          <div className="relative hidden md:block">
+            <div className="absolute -inset-12 bg-gradient-to-tr from-[#C89D47]/15 to-transparent blur-2xl pointer-events-none animate-float-glow" />
+
+            <div
+              ref={heroRef}
+              className="hero-tilt relative"
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+            >
+              <div className="hero-jharokha-border relative border-2 border-[#C89D47]/40 bg-white/40 backdrop-blur-md p-2.5 shadow-[0_25px_60px_-15px_rgba(74,14,23,0.12)]">
+                <div
+                  className="hero-jharokha-inner overflow-hidden"
+                  style={{
+                    transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+                    transition: 'transform 0.15s ease-out',
+                    transformStyle: 'preserve-3d',
+                  }}
+                >
+                  <div className="hero-jharokha overflow-hidden">
+                    <img
+                      src="/hero-jewelry.png"
+                      alt="Heritage Jadau and Polki diamond jewelry from Jaipur"
+                      className="w-full h-[500px] object-cover transition-transform duration-700 hover:scale-105"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="absolute -top-3 -right-3 h-6 w-6 rounded-full bg-gold/20 animate-pulse-ring" />
+              <div className="absolute -bottom-2 -left-2 h-4 w-4 rounded-full bg-gold/15 animate-pulse-ring" style={{ animationDelay: '1s' }} />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Collection Cards */}
+      <CollectionCards />
+
+      {/* Heritage Heirlooms */}
+      <section className="mx-auto max-w-[1280px] px-6 py-16 md:px-20">
+        <div className="text-center">
+          <div className="flex items-center justify-center gap-4">
+            <div className="h-px w-16 bg-gold/40" />
+            <p className="font-sans text-[9px] uppercase tracking-[0.3em] text-gold-dark">The Royal Karigari</p>
+            <div className="h-px w-16 bg-gold/40" />
+          </div>
+          <h2 className="mt-4 font-serif text-4xl text-maroon md:text-5xl">Heritage Heirlooms</h2>
+        </div>
+        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {products.slice(0, 4).map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+        <div className="mt-10 text-center">
+          <Link href="/products" className="inline-flex items-center gap-2 rounded-full border border-maroon/20 px-8 py-3.5 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-maroon transition-all duration-300 hover:bg-maroon hover:text-gold-light hover:border-maroon hover:shadow-[0_0_25px_rgba(200,157,71,0.45)] active:scale-95">
+            View All Heritage <ArrowRight size={14} />
+          </Link>
+        </div>
+      </section>
+
+      {/* Legacy Section */}
+      <section className="border-y border-[#C89D47]/15 bg-[#F5F0E5]">
+        <div className="mx-auto grid max-w-[1280px] items-center gap-12 px-6 py-24 md:grid-cols-2 md:px-20">
+          <div className="relative">
+            <div className="absolute -inset-4 rounded-t-[3rem] bg-gradient-to-br from-gold/10 to-transparent" />
+            <img src="/atelier.png" alt="Master karigar crafting heritage jewelry in Jaipur" className="relative aspect-[1.25] w-full rounded-t-[2.5rem] rounded-b-2xl object-cover border border-gold/20 p-1 bg-white/30 shadow-lg" />
+          </div>
+          <div>
+            <div className="flex items-center gap-3">
+              <div className="h-px w-8 bg-gold/40" />
+              <p className="font-sans text-[9px] uppercase tracking-[0.3em] text-gold-dark">Our Legacy</p>
+            </div>
+            <h2 className="mt-5 font-serif text-4xl leading-tight text-maroon md:text-5xl">A Legacy of Sacred Karigari</h2>
+            <p className="mt-7 font-sans text-sm leading-7 text-maroon/50">For over seven decades, Shreeram Jewellers has preserved the sacred art of Jadau, Polki, Kundan, and temple gold jewellery from our atelier in Jaipur. Three generations of master karigars, each piece a testament to Rajasthan&apos;s richest jewellery traditions.</p>
+            <Link href="/about" className="mt-7 inline-flex items-center gap-3 font-sans text-[10px] uppercase tracking-[0.2em] text-gold-dark transition-colors hover:text-maroon">Discover Our Heritage <ArrowRight size={14} /></Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Badges */}
+      <section className="px-6 py-16 md:px-20">
+        <div className="mx-auto max-w-[1280px]">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { icon: '🏛️', title: 'BIS Hallmarked', desc: '916 Gold Certified' },
+              { icon: '💎', title: 'GIA Certified', desc: 'Diamond Grading' },
+              { icon: '🚚', title: 'Free Delivery', desc: 'Pan India Shipping' },
+              { icon: '🔄', title: 'Easy Returns', desc: '7-Day Return Policy' },
+            ].map((badge) => (
+              <div key={badge.title} className="text-center">
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-maroon/5 text-2xl">{badge.icon}</div>
+                <h3 className="mt-4 font-serif text-base text-maroon">{badge.title}</h3>
+                <p className="mt-1 font-sans text-[10px] uppercase tracking-[0.15em] text-maroon/40">{badge.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter */}
+      <section className="px-6 py-24 text-center md:px-20 bg-[#F5F0E5]">
+        <div className="mx-auto max-w-[560px]">
+          <h2 className="font-serif text-4xl text-maroon">Join the Royal Circle</h2>
+          <p className="mx-auto mt-5 font-sans text-sm text-maroon/50">Subscribers receive private access to bridal previews, heritage collection launches, and exclusive karigari showcases from our Jaipur atelier.</p>
+          <div className="mt-8 flex gap-3 max-w-md mx-auto">
+            <input
+              type="email"
+              placeholder="Your email address"
+              className="flex-1 h-12 rounded-full border border-[#E5DDD0] bg-white/70 px-5 font-sans text-sm text-maroon outline-none focus:border-gold focus:ring-2 focus:ring-gold/10 transition-all placeholder:text-maroon/30"
+            />
+            <button className="h-12 rounded-full bg-maroon border border-gold/40 px-6 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold-light transition-all duration-300 hover:bg-maroon-dark hover:shadow-[0_0_25px_rgba(200,157,71,0.45)]">
+              Subscribe
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  )
+}
+</file>
+
+<file path="components/product-card.tsx">
+'use client'
+import Link from 'next/link'
+import { Heart, Eye, MessageCircle, Star } from 'lucide-react'
+import { useState } from 'react'
+import type { Product } from '@/lib/products'
+import { formatPrice } from '@/lib/products'
+import { useWishlist } from '@/components/wishlist-context'
+
+export function ProductCard({ product }: { product: Product }) {
+  const [hoveredMetal, setHoveredMetal] = useState<string | null>(null)
+  const [selectedMetal, setSelectedMetal] = useState(product.metals[0]?.name ?? '')
+  const { toggle, has } = useWishlist()
+  const isWishlisted = has(product.id)
+
+  const whatsappUrl = `https://wa.me/9198XXXXXXXX?text=${encodeURIComponent(`Hi, I'm interested in ${product.name} (${product.code}). Please share details.`)}`
+
+  return (
+    <article className="group bg-white/70 backdrop-blur-lg border border-[#C89D47]/25 rounded-2xl overflow-hidden shadow-[0_8px_24px_rgba(74,14,23,0.04)] hover:shadow-[0_12px_32px_rgba(74,14,23,0.08)] hover:border-[#C89D47]/40 transition-all duration-500">
+      <div className="relative aspect-[4/5] overflow-hidden bg-[#FAF6EE]">
+        <Link href={`/products/${product.id}`}>
+          <img
+            src={product.image}
+            alt={product.name}
+            style={{ objectPosition: product.position }}
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+          />
+        </Link>
+
+        <div className="product-image-overlay absolute inset-0 bg-gradient-to-t from-maroon/10 via-transparent to-transparent" />
+
+        {/* Badge */}
+        {product.badge && (
+          <div className="absolute top-3 left-3">
+            <span className={`inline-block rounded-full px-3 py-1 font-sans text-[8px] font-medium uppercase tracking-[0.1em] text-gold-light ${
+              product.badge === 'Sale' ? 'bg-red-500/90' : product.badge === 'New' ? 'bg-emerald-heritage/90' : product.badge === 'Premium' ? 'bg-maroon/90' : 'bg-gold-dark/90'
+            }`}>
+              {product.badge}
+            </span>
+          </div>
+        )}
+
+        {/* Floating Actions */}
+        <div className="product-image-overlay absolute right-3 top-3 flex flex-col gap-2">
+          <button
+            aria-label={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
+            onClick={(e) => {
+              e.preventDefault()
+              toggle(product)
+            }}
+            className="flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-md bg-white/80 border border-gold/20 text-maroon/60 transition-colors duration-200 hover:text-maroon hover:border-gold/40"
+          >
+            <Heart size={14} className={isWishlisted ? 'fill-gold text-gold' : ''} />
+          </button>
+          <Link
+            href={`/products/${product.id}`}
+            aria-label={`Quick view ${product.name}`}
+            className="flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-md bg-white/80 border border-gold/20 text-maroon/60 transition-colors duration-200 hover:text-maroon hover:border-gold/40"
+          >
+            <Eye size={14} />
+          </Link>
+        </div>
+
+        {/* Purity Tags */}
+        <div className="product-image-overlay absolute top-3 left-3 flex flex-wrap gap-1.5">
+          {product.tags.slice(0, 2).map((tag) => (
+            <span key={tag} className="inline-block rounded-full bg-maroon/80 backdrop-blur-md px-2.5 py-1 font-sans text-[8px] uppercase tracking-[0.1em] text-gold-light">
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {/* Collection Badge */}
+        <div className="product-image-overlay absolute bottom-3 left-3 right-3">
+          <span className="inline-block rounded-full bg-white/80 backdrop-blur-md px-3 py-1 font-sans text-[9px] uppercase tracking-[0.15em] text-maroon border border-gold/20">
+            {product.collection}
+          </span>
+        </div>
+      </div>
+
+      <div className="p-4 pb-5">
+        {/* Code & Category */}
+        <div className="flex items-center justify-between">
+          <span className="font-sans text-[8px] uppercase tracking-[0.2em] text-maroon/30">{product.code}</span>
+          <span className="font-sans text-[9px] uppercase tracking-[0.2em] text-gold-dark">{product.category}</span>
+        </div>
+
+        {/* Name */}
+        <Link href={`/products/${product.id}`} className="mt-2 block font-serif text-base font-medium leading-snug text-maroon transition-colors duration-200 hover:text-gold-dark">
+          {product.name}
+        </Link>
+
+        {/* Rating */}
+        <div className="mt-1.5 flex items-center gap-1.5">
+          <div className="flex items-center gap-0.5">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <Star key={star} size={10} className={star <= Math.round(product.rating) ? 'fill-gold text-gold' : 'fill-none text-maroon/20'} />
+            ))}
+          </div>
+          <span className="font-sans text-[9px] text-maroon/40">({product.reviewCount})</span>
+        </div>
+
+        {/* Price & Weight */}
+        <div className="mt-1.5 flex items-baseline gap-2">
+          <span className="font-sans text-sm font-medium text-gold-dark">{formatPrice(product.price)}</span>
+          {product.originalPrice && (
+            <span className="font-sans text-[10px] text-maroon/30 line-through">{formatPrice(product.originalPrice)}</span>
+          )}
+          <span className="font-sans text-[10px] text-maroon/40">| {product.weight}</span>
+        </div>
+
+        {/* Metal Swatches */}
+        {product.metals.length > 0 && (
+          <div className="mt-3 flex items-center gap-1.5">
+            {product.metals.map((metal) => (
+              <button
+                key={metal.name}
+                aria-label={metal.name}
+                onMouseEnter={() => setHoveredMetal(metal.name)}
+                onMouseLeave={() => setHoveredMetal(null)}
+                onClick={() => setSelectedMetal(metal.name)}
+                className={`relative h-4 w-4 rounded-full border transition-all duration-200 ${
+                  selectedMetal === metal.name
+                    ? 'border-gold ring-1 ring-gold/30 scale-110'
+                    : 'border-[#E5DDD0] hover:border-gold/50'
+                }`}
+                style={{ backgroundColor: metal.hex }}
+                title={metal.name}
+              />
+            ))}
+            {(hoveredMetal || selectedMetal) && (
+              <span className="ml-1 font-sans text-[9px] text-maroon/40">
+                {hoveredMetal || selectedMetal}
+              </span>
+            )}
+          </div>
+        )}
+
+        {/* CTAs */}
+        <div className="mt-4 flex gap-2">
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-1 items-center justify-center gap-2 rounded-full border border-[#25D366]/40 bg-[#25D366]/10 px-3 py-2.5 font-sans text-[9px] font-medium uppercase tracking-[0.1em] text-[#25D366] transition-all duration-300 hover:bg-[#25D366]/20 hover:shadow-[0_0_15px_rgba(37,211,102,0.15)]"
+          >
+            <MessageCircle size={12} />
+            Enquire
+          </a>
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-1 items-center justify-center gap-2 rounded-full border border-maroon/20 bg-maroon/5 px-3 py-2.5 font-sans text-[9px] font-medium uppercase tracking-[0.1em] text-maroon transition-all duration-300 hover:bg-maroon hover:text-gold-light hover:border-maroon hover:shadow-[0_0_15px_rgba(74,14,23,0.2)]"
+          >
+            <MessageCircle size={12} />
+            WhatsApp
+          </a>
+        </div>
+      </div>
+    </article>
+  )
+}
+</file>
+
+</files>
