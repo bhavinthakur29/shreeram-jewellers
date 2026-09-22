@@ -3,11 +3,13 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import { CartProvider } from '@/components/cart-context'
+import { WishlistProvider } from '@/components/wishlist-context'
 import { CartDrawer } from '@/components/cart-drawer'
 import { MetalTicker } from '@/components/metal-ticker'
-import { ConciergePill } from '@/components/concierge-pill'
+import { AnnouncementBar } from '@/components/announcement-bar'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
+import { MobileBottomNav } from '@/components/mobile-bottom-nav'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' })
@@ -22,14 +24,17 @@ export const viewport: Viewport = { colorScheme: 'light', themeColor: '#FAF6EE',
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable} bg-background`}>
-      <body className="font-sans antialiased text-foreground">
+      <body className="font-sans antialiased text-foreground pb-16 md:pb-0">
         <CartProvider>
-          <MetalTicker />
-          <SiteHeader />
-          <CartDrawer />
-          <ConciergePill />
-          {children}
-          <SiteFooter />
+          <WishlistProvider>
+            <AnnouncementBar />
+            <MetalTicker />
+            <SiteHeader />
+            <CartDrawer />
+            {children}
+            <SiteFooter />
+            <MobileBottomNav />
+          </WishlistProvider>
         </CartProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

@@ -3,35 +3,71 @@ import Link from 'next/link'
 export function SiteFooter() {
   return (
     <footer className="bg-maroon px-6 py-16 text-[#FAF6EE] md:px-20">
-      <div className="mx-auto grid max-w-[1280px] gap-12 md:grid-cols-4">
+      <div className="mx-auto grid max-w-[1280px] gap-12 md:grid-cols-5">
         {/* Brand Column */}
-        <div>
+        <div className="md:col-span-2">
           <Link href="/" className="font-serif text-2xl text-gold-light tracking-[0.2em]">SHREERAM</Link>
           <p className="mt-1 font-sans text-[8px] uppercase tracking-[0.3em] text-[#E8D39E]/70">JAIPUR • RAJASTHAN</p>
-          <p className="mt-8 max-w-[250px] font-sans text-sm leading-6 text-[#FAF6EE]/80">
+          <p className="mt-6 max-w-[300px] font-sans text-sm leading-6 text-[#FAF6EE]/80">
             The Pink City&apos;s heritage atelier for Jadau, Polki, Kundan &amp; temple gold jewellery. Crafted by master karigars of Rajasthan since 1952.
           </p>
-          <div className="mt-8 space-y-2">
-            <p className="font-sans text-[9px] uppercase tracking-[0.15em] text-[#E8D39E]/70">Crafted by Master Karigars of Rajasthan</p>
+
+          {/* Social Links */}
+          <div className="mt-6 flex items-center gap-3">
+            {[
+              { label: 'Instagram', href: '#' },
+              { label: 'Facebook', href: '#' },
+              { label: 'YouTube', href: '#' },
+              { label: 'WhatsApp', href: 'https://wa.me/9198XXXXXXXX' },
+            ].map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-[#C89D47]/30 text-[#E8D39E]/60 transition-all hover:border-[#C89D47]/60 hover:text-[#E8D39E]"
+                aria-label={social.label}
+              >
+                <span className="font-sans text-[10px]">{social.label[0]}</span>
+              </a>
+            ))}
+          </div>
+
+          {/* Payment Methods */}
+          <div className="mt-6">
+            <p className="font-sans text-[9px] uppercase tracking-[0.15em] text-[#E8D39E]/50 mb-3">We Accept</p>
+            <div className="flex items-center gap-2">
+              {['Visa', 'Mastercard', 'UPI', 'Net Banking', 'COD'].map((method) => (
+                <span key={method} className="rounded border border-[#C89D47]/20 px-2 py-1 font-sans text-[8px] text-[#E8D39E]/50">
+                  {method}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Collections */}
+        {/* Quick Links */}
         <div>
-          <p className="font-sans text-[10px] uppercase tracking-[0.2em] font-medium text-[#E8D39E]">Heritage Collections</p>
+          <p className="font-sans text-[10px] uppercase tracking-[0.2em] font-medium text-[#E8D39E]">Quick Links</p>
           <div className="mt-6 space-y-3">
-            {['Jadau & Polki', 'Meenakari Enamel', 'Royal Rajputi Aad', 'Temple Gold Haram', 'Bridal Trousseau'].map((item) => (
-              <Link key={item} href="/products" className="block font-sans text-sm text-[#FAF6EE]/80 transition-colors hover:text-[#FAF6EE]">{item}</Link>
+            {[
+              { label: 'All Collections', href: '/products' },
+              { label: 'Bridal Trousseau', href: '/products?category=Sets' },
+              { label: 'About Our Legacy', href: '/about' },
+              { label: 'Care Guide', href: '/care' },
+              { label: 'Contact Us', href: '/contact' },
+            ].map((item) => (
+              <Link key={item.label} href={item.href} className="block font-sans text-sm text-[#FAF6EE]/80 transition-colors hover:text-[#FAF6EE]">{item.label}</Link>
             ))}
           </div>
         </div>
 
-        {/* Services */}
+        {/* Policies */}
         <div>
-          <p className="font-sans text-[10px] uppercase tracking-[0.2em] font-medium text-[#E8D39E]">Atelier Services</p>
+          <p className="font-sans text-[10px] uppercase tracking-[0.2em] font-medium text-[#E8D39E]">Policies</p>
           <div className="mt-6 space-y-3">
-            {['Book Jaipur Atelier Visit', 'Virtual Video Viewing', 'Bridal Concierge', 'Custom Bespoke Commission', 'Heritage Care Guide'].map((item) => (
-              <Link key={item} href="/care" className="block font-sans text-sm text-[#FAF6EE]/80 transition-colors hover:text-[#FAF6EE]">{item}</Link>
+            {['Shipping & Returns', 'Privacy Policy', 'Terms of Service', 'BIS Certification', 'Hallmark Guarantee'].map((item) => (
+              <span key={item} className="block font-sans text-sm text-[#FAF6EE]/80">{item}</span>
             ))}
           </div>
         </div>

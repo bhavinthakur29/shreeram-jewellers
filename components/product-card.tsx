@@ -1,14 +1,16 @@
 'use client'
 import Link from 'next/link'
-import { Heart, Eye, MessageCircle } from 'lucide-react'
+import { Heart, Eye, MessageCircle, Star } from 'lucide-react'
 import { useState } from 'react'
 import type { Product } from '@/lib/products'
 import { formatPrice } from '@/lib/products'
+import { useWishlist } from '@/components/wishlist-context'
 
 export function ProductCard({ product }: { product: Product }) {
-  const [liked, setLiked] = useState(false)
   const [hoveredMetal, setHoveredMetal] = useState<string | null>(null)
   const [selectedMetal, setSelectedMetal] = useState(product.metals[0]?.name ?? '')
+  const { toggle, has } = useWishlist()
+  const isWishlisted = has(product.id)
 
   const whatsappUrl = `https://wa.me/9198XXXXXXXX?text=${encodeURIComponent(`Hi, I'm interested in ${product.name} (${product.code}). Please share details.`)}`
 
@@ -26,14 +28,28 @@ export function ProductCard({ product }: { product: Product }) {
 
         <div className="product-image-overlay absolute inset-0 bg-gradient-to-t from-maroon/10 via-transparent to-transparent" />
 
+        {/* Badge */}
+        {product.badge && (
+          <div className="absolute top-3 left-3">
+            <span className={`inline-block rounded-full px-3 py-1 font-sans text-[8px] font-medium uppercase tracking-[0.1em] text-gold-light ${
+              product.badge === 'Sale' ? 'bg-red-500/90' : product.badge === 'New' ? 'bg-emerald-heritage/90' : product.badge === 'Premium' ? 'bg-maroon/90' : 'bg-gold-dark/90'
+            }`}>
+              {product.badge}
+            </span>
+          </div>
+        )}
+
         {/* Floating Actions */}
         <div className="product-image-overlay absolute right-3 top-3 flex flex-col gap-2">
           <button
-            aria-label={`Add ${product.name} to wishlist`}
-            onClick={() => setLiked(!liked)}
+            aria-label={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
+            onClick={(e) => {
+              e.preventDefault()
+              toggle(product)
+            }}
             className="flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-md bg-white/80 border border-gold/20 text-maroon/60 transition-colors duration-200 hover:text-maroon hover:border-gold/40"
           >
-            <Heart size={14} className={liked ? 'fill-gold text-gold' : ''} />
+            <Heart size={14} className={isWishlisted ? 'fill-gold text-gold' : ''} />
           </button>
           <Link
             href={`/products/${product.id}`}
@@ -68,25 +84,29 @@ export function ProductCard({ product }: { product: Product }) {
           <span className="font-sans text-[9px] uppercase tracking-[0.2em] text-gold-dark">{product.category}</span>
         </div>
 
-        {/* Name & Price */}
-        <div className="mt-2 flex items-start justify-between gap-2">
-          <Link
-            href={`/products/${product.id}`}
-            className="font-serif text-base font-medium leading-snug text-maroon transition-colors duration-200 hover:text-gold-dark"
-          >
-            {product.name}
-          </Link>
+        {/* Name */}
+        <Link href={`/products/${product.id}`} className="mt-2 block font-serif text-base font-medium leading-snug text-maroon transition-colors duration-200 hover:text-gold-dark">
+          {product.name}
+        </Link>
+
+        {/* Rating */}
+        <div className="mt-1.5 flex items-center gap-1.5">
+          <div className="flex items-center gap-0.5">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <Star key={star} size={10} className={star <= Math.round(product.rating) ? 'fill-gold text-gold' : 'fill-none text-maroon/20'} />
+            ))}
+          </div>
+          <span className="font-sans text-[9px] text-maroon/40">({product.reviewCount})</span>
         </div>
 
         {/* Price & Weight */}
         <div className="mt-1.5 flex items-baseline gap-2">
           <span className="font-sans text-sm font-medium text-gold-dark">{formatPrice(product.price)}</span>
-          <span className="font-sans text-[10px] text-maroon/40">| Approx. {product.weight}</span>
+          {product.originalPrice && (
+            <span className="font-sans text-[10px] text-maroon/30 line-through">{formatPrice(product.originalPrice)}</span>
+          )}
+          <span className="font-sans text-[10px] text-maroon/40">| {product.weight}</span>
         </div>
-
-        <p className="mt-2 line-clamp-2 font-sans text-xs leading-relaxed text-maroon/40">
-          {product.description}
-        </p>
 
         {/* Metal Swatches */}
         {product.metals.length > 0 && (
@@ -115,7 +135,7 @@ export function ProductCard({ product }: { product: Product }) {
           </div>
         )}
 
-        {/* Dual Luxury CTAs */}
+        {/* CTAs */}
         <div className="mt-4 flex gap-2">
           <a
             href={whatsappUrl}
