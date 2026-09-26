@@ -1,24 +1,124 @@
 'use client'
-import { useState } from 'react'
-import { MessageCircle, ShieldCheck, Star, Heart, Share2 } from 'lucide-react'
-import { getProduct, relatedProducts, formatPrice } from '@/lib/products'
+
+import { useState, useEffect, useMemo, use } from 'react'
+import Image from 'next/image'
+import { MessageCircle, ShieldCheck, Star, Heart } from 'lucide-react'
+import {
+  getProduct,
+  relatedProducts,
+  formatPrice,
+  products as fallbackProducts,
+} from '@/lib/products'
 import { ProductCard } from '@/components/product-card'
 import { ReviewsSection } from '@/components/reviews-section'
 import { PincodeChecker } from '@/components/pincode-checker'
 import { useWishlist } from '@/components/wishlist-context'
 import { useCart } from '@/components/cart-context'
 
-export default function ProductDetailPage({ params }: { params: { id: string } }) {
-  const product = getProduct(params.id)
+const FALLBACK_IMAGE =
+  'https://images.unsplash.com/photo-1599643478518-17488fbbcd75?q=80&w=1000&auto=format&fit=crop'
+
+interface PageProps {
+  params: Promise<{ id: string }>
+}
+
+export default function ProductDetailPage({ params }: PageProps) {
+  const { id } = use(params)
+
+  const [liveProduct, setLiveProduct] = useState<any>(null)
   const [selectedImage, setSelectedImage] = useState(0)
-  const [selectedMetal, setSelectedMetal] = useState(product.metals[0]?.name ?? '')
+  const [imageErrorMap, setImageErrorMap] = useState<Record<string, boolean>>({})
+
+  // Fetch dynamic calculations from TekBiz feed
+  useEffect(() => {
+    if (!id) return
+
+    const feedUrl =
+      process.env.NODE_ENV === 'development'
+        ? 'http://localhost:3000/api/public/shreeram/products'
+        : 'https://tekbiz.dev/api/public/shreeram/products'
+
+    fetch(feedUrl)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (!data?.products || !Array.isArray(data.products)) return
+        const match = data.products.find(
+          (p: any) => p.id === id || p.code === id
+        )
+        if (match) setLiveProduct(match)
+      })
+      .catch(() => null)
+  }, [id])
+
+  // Merge static metadata with live dynamic calculations
+  const product = useMemo(() => {
+    const base =
+      getProduct(id) ||
+      fallbackProducts.find((p) => p.id === id || p.code === id) ||
+      fallbackProducts[0]
+
+    if (!liveProduct) return base
+
+    const dynamicPrice = liveProduct.price ?? base.price
+    const originalPrice =
+      base?.originalPrice && base.originalPrice > dynamicPrice
+        ? base.originalPrice
+        : Math.round(dynamicPrice * 1.08)
+
+    const galleryImages: string[] = []
+    if (liveProduct.image) galleryImages.push(liveProduct.image)
+    if (base?.images) {
+      base.images.forEach((img: string) => {
+        if (img && !galleryImages.includes(img)) galleryImages.push(img)
+      })
+    }
+    if (galleryImages.length === 0 && base?.image) galleryImages.push(base.image)
+
+    return {
+      ...base,
+      ...liveProduct,
+      price: dynamicPrice,
+      originalPrice,
+      weight: liveProduct.weight || base.weight,
+      inStock: liveProduct.inStock ?? base.inStock ?? true,
+      metals: base?.metals || [],
+      details: [
+        ['Metal', `${liveProduct.purity || '22KT'} Gold`],
+        ['Net Weight', `${liveProduct.netWeightGrams || liveProduct.weight} Approx.`],
+        ['Making Charges', liveProduct.makingCharge || '12%'],
+        ['Hallmark Fee', `₹${liveProduct.hallmarkFee ?? 45}`],
+        ['Origin', 'Handcrafted in Jaipur'],
+      ],
+      reviews: base?.reviews || [],
+      rating: typeof liveProduct.rating === 'number' ? liveProduct.rating : base?.rating ?? 4.9,
+      reviewCount: base?.reviewCount ?? 124,
+      tags: liveProduct.tags || base?.tags || [
+        `${liveProduct.purity || '22KT'} BIS Hallmarked`,
+        'Jaipur Karigari',
+      ],
+      images: galleryImages,
+    }
+  }, [id, liveProduct])
+
+  const [selectedMetal, setSelectedMetal] = useState(
+    product.metals?.[0]?.name ?? ''
+  )
+
   const { toggle, has } = useWishlist()
   const { add, openCart } = useCart()
   const isWishlisted = has(product.id)
 
-  const images = product.images || [product.image]
+  const images: string[] = useMemo(() => {
+    const list = product.images && product.images.length > 0 ? product.images : [FALLBACK_IMAGE]
+    return list.slice(0, 4)
+  }, [product])
 
-  const whatsappUrl = `https://wa.me/9198XXXXXXXX?text=${encodeURIComponent(`Hi, I'm interested in ${product.name} (${product.code}). Please share details.`)}`
+  const currentRawSrc = images[selectedImage] || images[0] || FALLBACK_IMAGE
+  const activeImage = imageErrorMap[currentRawSrc] ? FALLBACK_IMAGE : currentRawSrc
+
+  const whatsappUrl = `https://wa.me/9198XXXXXXXX?text=${encodeURIComponent(
+    `Hi, I'm interested in ${product.name} (${product.code}) priced at ₹${Number(product.price).toLocaleString('en-IN')}. Please share availability and details.`
+  )}`
 
   return (
     <main>
@@ -26,88 +126,145 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
         {/* Images */}
         <div>
           <div className="hero-jharokha-border aspect-square overflow-hidden rounded-t-[3rem] rounded-b-2xl bg-[#FAF6EE] border-2 border-[#C89D47]/40 p-2.5 shadow-[0_8px_24px_rgba(74,14,23,0.04)]">
-            <div className="hero-jharokha overflow-hidden h-full">
-              <img
-                src={images[selectedImage]}
+            <div className="hero-jharokha relative h-full w-full overflow-hidden rounded-t-[2.5rem] rounded-b-xl bg-[#F5EFE6]">
+              <Image
+                src={activeImage}
                 alt={product.name}
-                style={{ objectPosition: product.position }}
-                className="h-full w-full rounded-t-[2.5rem] rounded-b-xl object-cover transition-opacity duration-300"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{ objectPosition: product.position || 'center' }}
+                className="object-cover transition-opacity duration-300"
+                onError={() => {
+                  setImageErrorMap((prev) => ({ ...prev, [currentRawSrc]: true }))
+                }}
               />
             </div>
           </div>
+
+          {/* 4 Thumbnails */}
           <div className="mt-4 grid grid-cols-4 gap-3">
-            {images.map((image, index) => (
-              <button
-                key={`${image}-${index}`}
-                onClick={() => setSelectedImage(index)}
-                className={`aspect-square overflow-hidden rounded-xl border-2 transition-all duration-200 ${
-                  index === selectedImage ? 'border-gold ring-1 ring-gold/20' : 'border-[#E5DDD0] hover:border-gold/40'
-                }`}
-              >
-                <img src={image} alt="" className="h-full w-full object-cover" />
-              </button>
-            ))}
+            {images.map((image, index) => {
+              const src = imageErrorMap[image] ? FALLBACK_IMAGE : image
+              return (
+                <button
+                  key={`${image}-${index}`}
+                  onClick={() => setSelectedImage(index)}
+                  className={`relative aspect-square overflow-hidden rounded-xl border-2 transition-all duration-200 bg-[#F5EFE6] ${index === selectedImage
+                      ? 'border-gold ring-1 ring-gold/20'
+                      : 'border-[#E5DDD0] hover:border-gold/40'
+                    }`}
+                >
+                  <Image
+                    src={src}
+                    alt=""
+                    fill
+                    sizes="120px"
+                    className="object-cover"
+                    onError={() => {
+                      setImageErrorMap((prev) => ({ ...prev, [image]: true }))
+                    }}
+                  />
+                </button>
+              )
+            })}
           </div>
         </div>
 
         {/* Details */}
         <div>
           <div className="flex items-center gap-2">
-            <p className="font-sans text-[9px] uppercase tracking-[0.25em] text-gold-dark">{product.code}</p>
+            <p className="font-sans text-[9px] uppercase tracking-[0.25em] text-gold-dark font-mono">
+              {product.code}
+            </p>
             <span className="text-gold/30">&bull;</span>
-            <span className="font-sans text-[9px] uppercase tracking-[0.2em] text-emerald-heritage">{product.inStock ? 'In Stock' : 'Made to Order'}</span>
+            <span
+              className={`font-sans text-[9px] uppercase tracking-[0.2em] font-medium ${product.inStock ? 'text-emerald-700' : 'text-rose-700'
+                }`}
+            >
+              {product.inStock ? 'In Stock' : 'Made to Order'}
+            </span>
           </div>
 
-          <h1 className="mt-5 font-serif text-4xl leading-tight text-maroon md:text-5xl">{product.name}</h1>
+          <h1 className="mt-5 font-serif text-4xl leading-tight text-maroon md:text-5xl">
+            {product.name}
+          </h1>
 
           {/* Rating */}
           <div className="mt-3 flex items-center gap-3">
             <div className="flex items-center gap-0.5">
               {[1, 2, 3, 4, 5].map((star) => (
-                <Star key={star} size={14} className={star <= Math.round(product.rating) ? 'fill-gold text-gold' : 'fill-none text-maroon/20'} />
+                <Star
+                  key={star}
+                  size={14}
+                  className={
+                    star <= Math.round(product.rating)
+                      ? 'fill-gold text-gold'
+                      : 'fill-none text-maroon/20'
+                  }
+                />
               ))}
             </div>
-            <span className="font-sans text-sm text-maroon/50">{product.rating} ({product.reviewCount} reviews)</span>
+            <span className="font-sans text-sm text-maroon/50">
+              {product.rating} ({product.reviewCount} reviews)
+            </span>
           </div>
 
           {/* Tags */}
           <div className="mt-4 flex flex-wrap gap-2">
-            {product.tags.map((tag) => (
-              <span key={tag} className="inline-flex items-center gap-1.5 rounded-full border border-gold/20 bg-gold/5 px-3 py-1 font-sans text-[9px] uppercase tracking-[0.1em] text-gold-dark">
+            {(product.tags || []).map((tag: string) => (
+              <span
+                key={tag}
+                className="inline-flex items-center gap-1.5 rounded-full border border-gold/20 bg-gold/5 px-3 py-1 font-sans text-[9px] uppercase tracking-[0.1em] text-gold-dark"
+              >
                 <ShieldCheck size={10} />
                 {tag}
               </span>
             ))}
           </div>
 
-          {/* Price & Weight */}
+          {/* Dynamic Price & Strikethrough */}
           <div className="mt-6 flex items-baseline gap-3">
-            <span className="font-sans text-2xl font-medium text-maroon">{formatPrice(product.price)}</span>
-            {product.originalPrice && (
-              <span className="font-sans text-sm text-maroon/30 line-through">{formatPrice(product.originalPrice)}</span>
+            <span className="font-sans text-2xl font-medium text-maroon">
+              {formatPrice(product.price)}
+            </span>
+            {product.originalPrice && product.originalPrice > product.price && (
+              <span className="font-sans text-sm text-maroon/30 line-through">
+                {formatPrice(product.originalPrice)}
+              </span>
             )}
-            <span className="font-sans text-sm text-maroon/40">| Approx. {product.weight}</span>
+            <span className="font-sans text-sm text-maroon/40">
+              | Approx. {product.weight}
+            </span>
           </div>
 
-          <p className="mt-6 font-sans text-sm leading-7 text-maroon/50">{product.description}</p>
+          <p className="mt-6 font-sans text-sm leading-7 text-maroon/50">
+            {product.description}
+          </p>
 
           {/* Metal Selection */}
-          {product.metals.length > 1 && (
+          {product.metals && product.metals.length > 1 && (
             <div className="mt-6">
-              <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-maroon/50 mb-3">Metal: {selectedMetal}</p>
+              <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-maroon/50 mb-3">
+                Metal: {selectedMetal}
+              </p>
               <div className="flex gap-3">
-                {product.metals.map((metal) => (
+                {product.metals.map((metal: any) => (
                   <button
                     key={metal.name}
                     onClick={() => setSelectedMetal(metal.name)}
-                    className={`flex items-center gap-2 rounded-full border px-4 py-2.5 transition-all duration-300 ${
-                      selectedMetal === metal.name
+                    className={`flex items-center gap-2 rounded-full border px-4 py-2.5 transition-all duration-300 ${selectedMetal === metal.name
                         ? 'border-gold bg-maroon text-gold-light shadow-[0_0_15px_rgba(200,157,71,0.2)]'
                         : 'border-[#C89D47]/20 bg-white/60 text-maroon hover:border-gold/40'
-                    }`}
+                      }`}
                   >
-                    <span className="h-4 w-4 rounded-full border border-white/20" style={{ backgroundColor: metal.hex }} />
-                    <span className="font-sans text-[10px] uppercase tracking-[0.1em]">{metal.name}</span>
+                    <span
+                      className="h-4 w-4 rounded-full border border-white/20"
+                      style={{ backgroundColor: metal.hex }}
+                    />
+                    <span className="font-sans text-[10px] uppercase tracking-[0.1em]">
+                      {metal.name}
+                    </span>
                   </button>
                 ))}
               </div>
@@ -116,9 +273,14 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
 
           {/* Specifications */}
           <div className="mt-8 space-y-3">
-            {product.details.map(([label, value]) => (
-              <div key={label} className="flex items-center justify-between border-b border-[#C89D47]/10 pb-3">
-                <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-maroon/40">{label}</span>
+            {(product.details || []).map(([label, value]: [string, string]) => (
+              <div
+                key={label}
+                className="flex items-center justify-between border-b border-[#C89D47]/10 pb-3"
+              >
+                <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-maroon/40">
+                  {label}
+                </span>
                 <span className="font-sans text-sm text-maroon">{value}</span>
               </div>
             ))}
@@ -138,11 +300,10 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             <div className="flex gap-3">
               <button
                 onClick={() => toggle(product)}
-                className={`flex h-12 flex-1 items-center justify-center gap-2 rounded-full border font-sans text-[10px] font-medium uppercase tracking-[0.2em] transition-all duration-300 ${
-                  isWishlisted
+                className={`flex h-12 flex-1 items-center justify-center gap-2 rounded-full border font-sans text-[10px] font-medium uppercase tracking-[0.2em] transition-all duration-300 ${isWishlisted
                     ? 'border-gold bg-gold/10 text-gold-dark'
                     : 'border-maroon/20 bg-white/60 text-maroon hover:border-maroon hover:bg-maroon hover:text-gold-light'
-                }`}
+                  }`}
               >
                 <Heart size={14} className={isWishlisted ? 'fill-gold' : ''} />
                 {isWishlisted ? 'Saved' : 'Save'}
@@ -166,8 +327,16 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
 
           {/* Trust Signals */}
           <div className="mt-8 flex flex-wrap items-center gap-4 gap-y-2">
-            {['BIS Hallmarked 916', 'GIA Certified', 'Insured Delivery', 'Easy Returns'].map((badge) => (
-              <span key={badge} className="flex items-center gap-1.5 font-sans text-[9px] uppercase tracking-[0.15em] text-maroon/30">
+            {[
+              'BIS Hallmarked 916',
+              'GIA Certified',
+              'Insured Delivery',
+              'Easy Returns',
+            ].map((badge) => (
+              <span
+                key={badge}
+                className="flex items-center gap-1.5 font-sans text-[9px] uppercase tracking-[0.15em] text-maroon/30"
+              >
                 <span className="h-1 w-1 rounded-full bg-gold/40" />
                 {badge}
               </span>
@@ -178,19 +347,27 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
 
       {/* Reviews */}
       <section className="mx-auto max-w-[1280px] px-6 md:px-20">
-        <ReviewsSection reviews={product.reviews} rating={product.rating} reviewCount={product.reviewCount} />
+        <ReviewsSection
+          reviews={product.reviews || []}
+          rating={product.rating || 4.9}
+          reviewCount={product.reviewCount || 0}
+        />
       </section>
 
-      {/* Related */}
+      {/* Related Products */}
       <section className="mx-auto max-w-[1280px] px-6 py-16 md:px-20">
         <div className="flex items-center justify-center gap-4">
           <div className="h-px w-16 bg-gold/40" />
-          <p className="font-sans text-[9px] uppercase tracking-[0.3em] text-gold-dark">You May Also Adore</p>
+          <p className="font-sans text-[9px] uppercase tracking-[0.3em] text-gold-dark">
+            You May Also Adore
+          </p>
           <div className="h-px w-16 bg-gold/40" />
         </div>
-        <h2 className="mt-4 text-center font-serif text-4xl text-maroon">Heritage Selections</h2>
+        <h2 className="mt-4 text-center font-serif text-4xl text-maroon">
+          Heritage Selections
+        </h2>
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {relatedProducts(product.id).map((p) => (
+          {(relatedProducts(product.id) || []).map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}
         </div>
